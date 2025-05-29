@@ -12,12 +12,12 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 ## 📆 Cronograma da Jornada
 
-### Mês 1 – Fundamentos de Jetpack Compose
+### Primeira Parte – Fundamentos de Jetpack Compose
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `BdayApp`     | Primeiro app simples usando Compose: exibe uma mensagem de aniversário | [`/projects/BdayApp`](projects/BdayApp)  |
-| `BreakBuddy`  | App de lembretes para pausas produtivas                                | [`/projects/BreakBuddy`](projects/BreakBuddy) _(em andamento)_ |
+| `BdayApp`     | Primeiro app simples usando Compose: exibe uma mensagem de aniversário | [`/month01-bdayapp`](month01-bdayapp)  |
+| `LearnTogether`  | App que fala um pouco sobre Jetpack Compose e brinca com imagens                              | [`/month02-apps/week1/LearnTogether/`](month02-apps/week1/LearnTogether) _(em andamento)_ |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
@@ -55,6 +55,7 @@ git clone https://github.com/seu-usuario/kotlin-journey.git
 * [Developer Android – Jetpack Compose](https://developer.android.com/jetpack/compose)
 * [Kotlinlang.org](https://kotlinlang.org/)
 * [Compose Pathway – Codelabs](https://developer.android.com/jetpack/compose/tutorial)
+* [Android Basics With Compose](https://developer.android.com/courses/android-basics-compose/course?hl=pt-br)
 
 ---
 
