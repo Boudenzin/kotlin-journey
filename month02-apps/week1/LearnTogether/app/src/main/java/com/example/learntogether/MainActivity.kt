@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.learntogether.ui.theme.LearnTogetherTheme
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +22,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearnTogetherTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    Title(
+                        mensagem = stringResource(R.string.title),
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -31,17 +33,24 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Title(mensagem: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = mensagem,
         modifier = modifier
     )
 }
 
+@Composable
+fun BannerImage() {
+
+}
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     LearnTogetherTheme {
-        Greeting("Android")
+        Title(
+            mensagem = stringResource(R.string.title),
+            modifier = Modifier.padding(16.dp)
+        )
     }
 }
