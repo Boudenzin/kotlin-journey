@@ -26,8 +26,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 ## 📘 Anotações
 
 - [`state-management.md`](notes/state-management.md): Como funciona o gerenciamento de estado em Compose.
-- [`jetpack-compose-vs-xml.md`](notes/jetpack-compose-vs-xml.md): Comparativo entre a abordagem declarativa e imperativa no Android.
-
+- [`ui-basics`](notes/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
 ---
 
 ## 🛠️ Tecnologias
