@@ -27,6 +27,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 - [`state-management.md`](notes/state-management.md): Como funciona o gerenciamento de estado em Compose.
 - [`ui-basics`](notes/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
+- [`composable-functions`](notes/composable-functions.md): Anotações sobre funções com Composable
 ---
 
 ## 🛠️ Tecnologias
