@@ -284,3 +284,190 @@ Por exemplo, ao usar `Row`, o IDE deve adicionar:
 `import androidx.compose.foundation.layout.Row`
 
 Verifique sempre a seção de importações no topo do seu arquivo Kotlin se encontrar algum problema de referência não resolvida.
+
+# Adicionar Imagens em Jetpack Compose 🖼️
+
+Exibir imagens é uma parte fundamental da maioria das interfaces de usuário. No Jetpack Compose, isso é feito de forma declarativa e integrada com o sistema de recursos do Android.
+
+## 1. Preparando e Importando Imagens para o Projeto
+
+Antes de exibir uma imagem no seu app Compose, você precisa adicioná-la aos recursos do seu projeto.
+
+### A. Usando o Resource Manager no Android Studio
+
+O Android Studio oferece uma ferramenta visual para facilitar a importação de imagens (drawables):
+
+1.  No Android Studio, acesse o **Resource Manager**:
+    * Clique em **Tools > Resource Manager** no menu superior.
+    * Ou, se já estiver visível, selecione a guia **Resource Manager** (geralmente ao lado da janela do projeto).
+2.  Clique no ícone **`+`** (Adicionar recursos ao módulo) dentro da aba "Drawable" do Resource Manager.
+3.  Selecione **"Import Drawables"**.
+    ![Exemplo do Resource Manager](month02-apps/week1/LearnTogether/app/src/main/res/drawable-mdpi/bg_compose_background.png) 
+4.  No navegador de arquivos do seu sistema, localize e selecione o(s) arquivo(s) de imagem que você deseja importar (ex: `.png`, `.jpg`, `.xml` para vetores).
+5.  Clique em **"Open"** (Abrir) e depois em **"Next"** (Avançar) e **"Import"** (Importar) nas caixas de diálogo seguintes.
+
+A imagem será copiada para a pasta `res/drawable` do seu projeto.
+
+### B. Considerações sobre Densidade de Pixels (`dpi`)
+
+O Android roda em uma vasta gama de dispositivos com diferentes densidades de tela (pixels por polegada - dpi). Para garantir que suas imagens apareçam com boa qualidade em todas as telas, você pode fornecer versões diferentes da mesma imagem para densidades específicas (ex: `mdpi`, `hdpi`, `xhdpi`, `xxhdpi`, `xxxhdpi`).
+
+* Se você importar uma imagem através do Resource Manager sem especificar uma densidade, ela geralmente vai para a pasta `res/drawable` (que funciona como um fallback ou para imagens de densidade única).
+* Para vetores drawables (arquivos XML), eles são independentes de densidade e vão para `res/drawable`.
+* O sistema Android seleciona automaticamente o recurso de imagem mais apropriado com base na densidade da tela do dispositivo.
+
+### C. Estrutura de Pastas de Recursos (`res/`)
+
+É uma prática fundamental no Android separar recursos (como imagens, layouts, strings, etc.) do código da aplicação. Isso facilita a manutenção e permite que o Android escolha os recursos corretos para diferentes configurações de dispositivo.
+
+A pasta `res/` (resources) no seu projeto contém subdiretórios para diferentes tipos de recursos:
+
+* **`res/drawable/`**: Para arquivos de imagem (bitmaps como PNG, JPG) e vetores drawables (XML).
+* **`res/mipmap/`**: Principalmente para ícones de lançador do aplicativo (ícones da tela de início), que podem precisar de densidades diferentes para uma ótima aparência.
+* **`res/values/`**: Para arquivos XML que definem valores simples, como strings (`strings.xml`), cores (`colors.xml`), dimensões (`dimens.xml`) e estilos (`themes.xml`).
+* Outros diretórios como `layout/` (para layouts XML tradicionais), `anim/`, `font/`, etc.
+
+## 2. A Classe `R` e IDs de Recurso
+
+Quando você adiciona recursos ao seu projeto e o compila, o Android Studio gera automaticamente uma classe chamada `R`. Esta classe contém **IDs estáticos (identificadores únicos)** para todos os recursos do seu projeto.
+
+* Você acessa seus recursos no código usando esses IDs.
+* Por exemplo, se você tem uma imagem `minha_imagem.png` na pasta `res/drawable/`, o ID gerado será `R.drawable.minha_imagem`.
+* Da mesma forma, uma string `app_name` em `strings.xml` é acessada via `R.string.app_name`.
+
+## 3. Tutorial: Exibindo Imagens com o Composable `Image`
+
+Para exibir uma imagem na sua UI do Compose, você utiliza o Composable `Image`.
+
+### A. Componentes Essenciais do `Image`
+
+O Composable `Image` requer principalmente dois parâmetros:
+
+* `painter`: Define *o que* será desenhado (a imagem em si).
+* `contentDescription`: Uma descrição textual da imagem para fins de acessibilidade.
+
+### B. Carregando Imagens Locais com `painterResource()`
+
+A forma mais comum de carregar uma imagem que está nos seus recursos `drawable` é usando a função `painterResource()`.
+
+1.  **Importe as funções necessárias:**
+    ```kotlin
+    import androidx.compose.foundation.Image
+    import androidx.compose.runtime.Composable
+    import androidx.compose.ui.res.painterResource
+    // Importe a classe R do seu projeto (geralmente auto-importada ou use o nome completo do pacote)
+    // Ex: import com.example.meuapp.R
+    ```
+
+2.  **Use `painterResource()` no Composable `Image`:**
+    A função `painterResource()` recebe o ID do recurso drawable como argumento.
+
+    ```kotlin
+    @Composable
+    fun MinhaImagemDeExemplo() {
+        Image(
+            painter = painterResource(id = R.drawable.androidparty), // Substitua 'androidparty' pelo nome do seu arquivo de imagem
+            contentDescription = "Logo da festa do Android" // Descrição para acessibilidade
+        )
+    }
+    ```
+    * **Nota:** O Android Studio pode destacar `painterResource` se a importação não tiver sido adicionada. Use `Alt + Enter` (ou `Option + Enter` no Mac) para importar.
+
+### C. A Importância do `contentDescription` (Acessibilidade)
+
+O parâmetro `contentDescription` é **crucial para a acessibilidade**. Ele fornece uma descrição textual da imagem que será lida por leitores de tela para usuários com deficiência visual.
+
+* **Sempre forneça uma descrição significativa.**
+* Se a imagem for puramente decorativa e não transmitir nenhuma informação importante, você pode definir `contentDescription = null`.
+
+    ```kotlin
+    @Composable
+    fun ImagemDecorativa() {
+        Image(
+            painter = painterResource(id = R.drawable.fundo_decorativo),
+            contentDescription = null // Imagem puramente decorativa, não transmite informação
+        )
+    }
+    ```
+
+### D. Personalizando com `Modifier`
+
+Como a maioria dos Composables, `Image` aceita um `Modifier` para personalizar sua aparência e layout (tamanho, preenchimento, bordas, etc.).
+
+```kotlin
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun AvatarDeUsuario() {
+    Image(
+        painter = painterResource(id = R.drawable.avatar_usuario),
+        contentDescription = "Avatar do perfil do usuário",
+        modifier = Modifier
+            .size(120.dp) // Define o tamanho da imagem
+            .clip(CircleShape) // Corta a imagem em formato circular
+            .padding(4.dp) // Adiciona um preenchimento ao redor
+    )
+}
+```
+
+### E. Controlando o Dimensionamento com `contentScale`
+
+Se as dimensões da sua imagem original não corresponderem exatamente às dimensões do Composable `Image` na tela, o `contentScale` define como a imagem deve ser dimensionada para caber.
+
+Valores comuns para `ContentScale`:
+
+* `ContentScale.Fit`: Redimensiona a imagem para caber dentro dos limites, mantendo a proporção. Pode deixar espaços vazios.
+* `ContentScale.Crop`: Redimensiona a imagem para preencher os limites, mantendo a proporção, mas pode cortar partes da imagem.
+* `ContentScale.FillBounds`: Preenche os limites esticando a imagem, sem manter a proporção.
+* `ContentScale.Inside`: Redimensiona a imagem para caber dentro dos limites se a imagem for maior que eles; caso contrário, mantém o tamanho original.
+* `ContentScale.None`: Não aplica dimensionamento, exibe a imagem no seu tamanho original, cortando se for maior que os limites.
+* `ContentScale.FillWidth`: Dimensiona a imagem para preencher a largura dos limites, ajustando a altura para manter a proporção.
+* `ContentScale.FillHeight`: Dimensiona a imagem para preencher a altura dos limites, ajustando a largura para manter a proporção.
+
+```kotlin
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.layout.ContentScale
+
+@Composable
+fun ImagemBanner() {
+    Image(
+        painter = painterResource(id = R.drawable.banner_promocional),
+        contentDescription = "Banner da promoção",
+        modifier = Modifier
+            .fillMaxWidth() // Ocupa toda a largura
+            .height(200.dp), // Define uma altura fixa
+        contentScale = ContentScale.Crop // Corta a imagem para preencher o espaço, mantendo a proporção
+    )
+}
+```
+
+### F. Outros Tipos de `Painter` (Avançado/Externo)
+
+Embora `painterResource()` seja para drawables locais, existem outros tipos de `Painter` que você pode usar, especialmente ao carregar imagens da internet com bibliotecas como Coil, Glide ou Picasso. Essas bibliotecas geralmente fornecem suas próprias funções Composable que retornam um `Painter`.
+
+Exemplo conceitual com Coil (requer a biblioteca Coil):
+```kotlin
+// import coil.compose.rememberAsyncImagePainter // Exemplo de importação do Coil
+
+// @Composable
+// fun ImagemDaInternet(url: String) {
+//     Image(
+//         painter = rememberAsyncImagePainter(model = url),
+//         contentDescription = "Imagem carregada da internet"
+//     )
+// }
+```
+
+## Resumo
+
+1.  **Importe** sua imagem para a pasta `res/drawable` (preferencialmente usando o Resource Manager).
+2.  No seu Composable, use a função `Image()`.
+3.  Defina o parâmetro `painter` usando `painterResource(id = R.drawable.nome_da_sua_imagem)`.
+4.  **Sempre** forneça um `contentDescription` significativo para acessibilidade (ou `null` para imagens decorativas).
+5.  Use `Modifier` e `contentScale` para personalizar a aparência e o dimensionamento.
