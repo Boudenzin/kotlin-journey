@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,9 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,9 +38,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GridLayout(modifier: Modifier = Modifier) {
-    Column {
-        Row {
-            Column {
+    Column ()
+        {
+        Row (modifier = modifier.weight(1f)) {
+            Column (modifier = modifier.weight(1f)) {
                 Text(
                     text = stringResource(id = R.string.title_1),
                     modifier = Modifier.padding(bottom = 16.dp),
@@ -49,7 +51,7 @@ fun GridLayout(modifier: Modifier = Modifier) {
                     text = stringResource(id = R.string.title_1_subtitle)
                 )
             }
-            Column {
+            Column (modifier = modifier.weight(1f)){
                 Text(
                     text = stringResource(id = R.string.title_2),
                     modifier = Modifier.padding(bottom = 16.dp),
@@ -60,8 +62,8 @@ fun GridLayout(modifier: Modifier = Modifier) {
                 )
             }
         }
-        Row {
-            Column {
+        Row (modifier = modifier.weight(1f)){
+            Column (modifier = modifier.weight(1f)){
                 Text(
                     text = stringResource(id = R.string.title_3),
                     modifier = Modifier.padding(bottom = 16.dp),
@@ -71,14 +73,14 @@ fun GridLayout(modifier: Modifier = Modifier) {
                     text = stringResource(id = R.string.title_3_subtitle)
                 )
             }
-            Column {
+            Column (modifier = modifier.weight(1f)){
                 Text(
-                    text = stringResource(id = R.string.title_3),
+                    text = stringResource(id = R.string.title_4),
                     modifier = Modifier.padding(bottom = 16.dp),
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = stringResource(id = R.string.title_3_subtitle)
+                    text = stringResource(id = R.string.title_4_subtitle)
                 )
             }
         }
