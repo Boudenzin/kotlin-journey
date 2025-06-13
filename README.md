@@ -48,7 +48,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 Clone este repositório e abra os projetos no Android Studio:
 
 ```bash
-git clone https://github.com/seu-usuario/kotlin-journey.git
+git clone https://github.com/Boudenzin/kotlin-journey.git
 ````
 
 ---
