@@ -1,0 +1,14 @@
+# Android/IntelliJ/IDEA
+.gradle/
+.idea/
+*.iml
+local.properties
+
+# Build outputs
+/build/
+*/build/
+.cxx/
+
+# MacOS / Windows
+.DS_Store
+Thumbs.db
