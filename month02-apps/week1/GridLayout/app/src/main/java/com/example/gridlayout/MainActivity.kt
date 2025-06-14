@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gridlayout.ui.theme.GridLayoutTheme
@@ -38,49 +39,61 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GridLayout(modifier: Modifier = Modifier) {
-    Column ()
+    Column (modifier = modifier)
         {
-        Row (modifier = modifier.weight(1f)) {
-            Column (modifier = modifier.weight(1f)) {
+        Row (modifier = Modifier.weight(1f)) {
+            Column (modifier = Modifier.weight(1f)
+                .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = stringResource(id = R.string.title_1),
                     modifier = Modifier.padding(bottom = 16.dp),
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = stringResource(id = R.string.title_1_subtitle)
+                    text = stringResource(id = R.string.title_1_subtitle),
+                    textAlign = TextAlign.Justify
                 )
             }
-            Column (modifier = modifier.weight(1f)){
+            Column (modifier = Modifier.weight(1f)
+                .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = stringResource(id = R.string.title_2),
                     modifier = Modifier.padding(bottom = 16.dp),
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = stringResource(id = R.string.title_2_subtitle)
+                    text = stringResource(id = R.string.title_2_subtitle),
+                    textAlign = TextAlign.Justify
                 )
             }
         }
-        Row (modifier = modifier.weight(1f)){
-            Column (modifier = modifier.weight(1f)){
+        Row (modifier = Modifier.weight(1f)){
+            Column (modifier = Modifier.weight(1f)
+                .fillMaxSize()){
                 Text(
                     text = stringResource(id = R.string.title_3),
                     modifier = Modifier.padding(bottom = 16.dp),
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = stringResource(id = R.string.title_3_subtitle)
+                    text = stringResource(id = R.string.title_3_subtitle),
+                    textAlign = TextAlign.Justify
                 )
             }
-            Column (modifier = modifier.weight(1f)){
+            Column (modifier = Modifier.weight(1f)
+                .fillMaxSize()){
                 Text(
                     text = stringResource(id = R.string.title_4),
                     modifier = Modifier.padding(bottom = 16.dp),
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = stringResource(id = R.string.title_4_subtitle)
+                    text = stringResource(id = R.string.title_4_subtitle),
+                    textAlign = TextAlign.Justify
                 )
             }
         }
