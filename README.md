@@ -16,10 +16,10 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `BdayApp`     | Primeiro app simples usando Compose: exibe uma mensagem de aniversário | [`/month01-bdayapp`](month01-bdayapp)  |
+| `BdayApp`     | Primeiro app simples usando Compose: exibe uma mensagem de aniversário | [`/month01-bdayapp`](month01/BDayApp)  |
 | `LearnTogether`  | App que fala um pouco sobre Jetpack Compose e brinca com imagens                              | [`/month02-apps/week1/LearnTogether/`](month02-apps/week1/LearnTogether) |
 | `Taskmanager`  | Tela de verificação das tarefas                              | [`/month02-apps/week1/TaskManager/`](month02-apps/week1/TaskManager) |
-| `GridLayout`  | Tela que dá explicações sobre os tipos de objetos em Compose                             | [`/month02-apps/week1/GridLayout/`](month02-apps/week1/GridLayout) _(em andamento)_ |
+| `GridLayout`  | Tela que dá explicações sobre os tipos de objetos em Compose                             | [`/month02-apps/week1/GridLayout/`](month02-apps/week1/GridLayout) |
 
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
