@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CartaoVisita</string>
+    <string name="card_name">Romildo Júnior</string>
+    <string name="subtitle_card">Desenvolvedor Mobile</string>
+    <string name="telefone">+55 (83) 99369 0377</string>
+    <string name="email">romildo.rodrigues@dcx.ufpb.br</string>
+    <string name="instagram">romildo.bd</string>
+    <string name="github">Boudenzin</string>
 </resources>
