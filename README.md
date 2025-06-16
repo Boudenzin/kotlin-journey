@@ -20,6 +20,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | `LearnTogether`  | App que fala um pouco sobre Jetpack Compose e brinca com imagens                              | [`/month02-apps/week1/LearnTogether/`](month02-apps/week1/LearnTogether) |
 | `Taskmanager`  | Tela de verificação das tarefas                              | [`/month02-apps/week1/TaskManager/`](month02-apps/week1/TaskManager) |
 | `GridLayout`  | Tela que dá explicações sobre os tipos de objetos em Compose                             | [`/month02-apps/week1/GridLayout/`](month02-apps/week1/GridLayout) |
+| `CartaoVisita`  | Tela que apresenta o cartão de visita                             | [`/month02-apps/week2/CartaoVisita/`](month02-apps/week2/CartaoVisita) |
 
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
