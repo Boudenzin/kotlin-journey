@@ -35,10 +35,15 @@ class MainActivity : ComponentActivity() {
 fun BackgroundImage(modifier: Modifier = Modifier) {
 
     val image = painterResource(R.drawable.bd_background_card)
+    val bd_photo = painterResource(R.drawable.bd_photo)
 
     Image(
         painter = image,
         contentDescription = null,
+    )
+    Image(
+        painter = bd_photo,
+        contentDescription = null
     )
 }
 
