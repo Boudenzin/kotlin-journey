@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -44,6 +45,7 @@ fun BackgroundImage(modifier: Modifier = Modifier) {
 
     val image = painterResource(R.drawable.bd_background_card)
     val bdphoto = painterResource(R.drawable.bd_photo)
+    val colorText = Color.White
 
     Box (modifier = Modifier.fillMaxSize()) {
         Image(
@@ -61,11 +63,13 @@ fun BackgroundImage(modifier: Modifier = Modifier) {
             )
             Text(
                 text = stringResource(R.string.card_name),
-                modifier = Modifier.padding(start = 16.dp, top = 8.dp)
+                modifier = Modifier.padding(start = 16.dp, top = 8.dp),
+                color = colorText
             )
             Text(
                 text = stringResource(R.string.subtitle_card),
-                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                color = colorText
             )
         }
         Column(
@@ -78,19 +82,23 @@ fun BackgroundImage(modifier: Modifier = Modifier) {
                 Column(){
                     Text(
                         text = stringResource(R.string.phone_number),
-                        modifier = Modifier.padding(start = 16.dp, top = 8.dp)
+                        modifier = Modifier.padding(start = 16.dp, top = 8.dp),
+                        color = colorText
                     )
                     Text(
                         text = stringResource(R.string.email_address),
-                        modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+                        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                        color = colorText
                     )
                     Text(
                         text = stringResource(R.string.instagram),
-                        modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+                        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                        color = colorText
                     )
                     Text(
                         text = stringResource(R.string.github),
-                        modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+                        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                        color = colorText
                     )
                 }
             }
