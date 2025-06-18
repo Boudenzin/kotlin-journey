@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,18 +45,19 @@ fun BackgroundImage(modifier: Modifier = Modifier) {
     val image = painterResource(R.drawable.bd_background_card)
     val bdphoto = painterResource(R.drawable.bd_photo)
 
-    Box {
+    Box (modifier = Modifier.fillMaxSize()) {
         Image(
             painter = image,
             contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
         )
         Column (
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.align(Alignment.Center)
         ){
             Image(
                 painter = bdphoto,
-                contentDescription = null
+                contentDescription = null,
             )
             Text(
                 text = stringResource(R.string.card_name),
@@ -67,8 +69,10 @@ fun BackgroundImage(modifier: Modifier = Modifier) {
             )
         }
         Column(
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.End
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(start = 16.dp, bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ){
             Row {
                 Column(){
