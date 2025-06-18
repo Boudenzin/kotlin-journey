@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cartaovisita.ui.theme.CartaoVisitaTheme
@@ -70,12 +71,14 @@ fun BackgroundImage(modifier: Modifier = Modifier) {
             )
             Text(
                 text = stringResource(R.string.card_name),
-                modifier = Modifier.padding(start = 16.dp, top = 8.dp),
-                color = colorText
+                modifier = Modifier.padding(start = 16.dp, top = 8.dp)
+                    .align(Alignment.CenterHorizontally),
+                color = colorText,
             )
             Text(
                 text = stringResource(R.string.subtitle_card),
-                modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+                    .align(Alignment.CenterHorizontally),
                 color = colorText
             )
         }
