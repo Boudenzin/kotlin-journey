@@ -13,6 +13,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -73,58 +78,106 @@ fun BackgroundImage(modifier: Modifier = Modifier) {
             contentScale = ContentScale.Crop
         )
         Column (
-            modifier = Modifier.align(Alignment.Center)
+            modifier = Modifier.align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ){
             Image(
                 painter = bdphoto,
                 contentDescription = null,
                 modifier = Modifier.padding(16.dp)
-                    .align(Alignment.CenterHorizontally)
                     .size(128.dp, 128.dp)
                     .clip(CircleShape),
             )
             Text(
                 text = stringResource(R.string.card_name),
-                modifier = Modifier.padding(start = 16.dp, top = 8.dp)
-                    .align(Alignment.CenterHorizontally),
+                modifier = Modifier.padding(start = 16.dp, top = 8.dp),
                 color = colorText,
+                fontFamily = ralewayFamily,
+                fontWeight = FontWeight.ExtraBold,
             )
             Text(
                 text = stringResource(R.string.subtitle_card),
-                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
-                    .align(Alignment.CenterHorizontally),
-                color = colorText
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                color = colorText,
+                fontFamily = ralewayFamily,
+                fontWeight = FontWeight.Bold,
             )
         }
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(start = 16.dp, bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+                .padding(32.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ){
-            Row {
-                Column(){
-                    Text(
-                        text = stringResource(R.string.phone_number),
-                        modifier = Modifier.padding(start = 16.dp, top = 8.dp),
-                        color = colorText
-                    )
-                    Text(
-                        text = stringResource(R.string.email_address),
-                        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
-                        color = colorText
-                    )
-                    Text(
-                        text = stringResource(R.string.instagram),
-                        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
-                        color = colorText
-                    )
-                    Text(
-                        text = stringResource(R.string.github),
-                        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
-                        color = colorText
-                    )
-                }
+             Row (
+                 verticalAlignment = Alignment.CenterVertically,
+             ) {
+                 Icon(
+                     imageVector = Icons.Filled.Phone,
+                     contentDescription = "telefone",
+                     modifier = Modifier.padding(top = 8.dp),
+                     tint = Color.White
+                 )
+                 Text(
+                     text = stringResource(R.string.phone_number),
+                     modifier = Modifier.padding(start = 16.dp, top = 8.dp),
+                     color = colorText,
+                     fontFamily = ralewayFamily,
+                     fontWeight = FontWeight.Normal,
+                 )
+             }
+            Row (
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Icon(
+                    imageVector = Icons.Filled.Email,
+                    contentDescription = "email",
+                    modifier = Modifier.padding(top = 4.dp),
+                    tint = Color.White
+                )
+                Text(
+                    text = stringResource(R.string.email_address),
+                    modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                    color = colorText,
+                    fontFamily = ralewayFamily,
+                    fontWeight = FontWeight.Normal,
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.instagram),
+                    contentDescription = "instagram",
+                    modifier = Modifier.padding(top = 4.dp)
+                        .size(24.dp),
+                    colorFilter = ColorFilter.tint(Color.White)
+                )
+                Text(
+                    text = stringResource(R.string.instagram),
+                    modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                    color = colorText,
+                    fontFamily = ralewayFamily,
+                    fontWeight = FontWeight.Normal,
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.github),
+                    contentDescription = "github",
+                    modifier = Modifier.padding(top = 4.dp)
+                        .size(24.dp),
+                    colorFilter = ColorFilter.tint(Color.White)
+                )
+                Text(
+                    text = stringResource(R.string.github),
+                    modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                    color = colorText,
+                    fontFamily = ralewayFamily,
+                    fontWeight = FontWeight.Normal,
+                )
             }
         }
     }
