@@ -23,10 +23,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cartaovisita.ui.theme.CartaoVisitaTheme
+
+val ralewayFamily = FontFamily(
+    Font(R.font.raleway_thin, FontWeight.Thin),           // Peso 100
+    Font(R.font.raleway_extralight, FontWeight.ExtraLight), // Peso 200
+    Font(R.font.raleway_light, FontWeight.Light),         // Peso 300
+    Font(R.font.raleway_regular, FontWeight.Normal),      // Peso 400 (Padrão)
+    Font(R.font.raleway_medium, FontWeight.Medium),       // Peso 500
+    Font(R.font.raleway_semibold, FontWeight.SemiBold),   // Peso 600
+    Font(R.font.raleway_bold, FontWeight.Bold),           // Peso 700
+    Font(R.font.raleway_extrabold, FontWeight.ExtraBold), // Peso 800
+    Font(R.font.raleway_heavy, FontWeight.Black)          // Peso 900 ("Heavy" geralmente mapeia para "Black")
+)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
