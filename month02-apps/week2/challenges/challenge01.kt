@@ -21,9 +21,12 @@ interface Atualizavel {
     }
 }
 
-open class SmartDevice(name: String, category: String): Ligavel {
+class LampadaInteligente(name: String, category: String): SmartDevice(name, category) {
+    override var tipo: String = category
     
-    var name = name
+}
+
+open class SmartDevice(val name: String, category: String): Ligavel {
     
     override var tipo: String = category
     
@@ -92,9 +95,11 @@ class SmartTvDevice(name: String, category: String): SmartDevice(name, category)
 
 fun main() {
     val smartTv = SmartTvDevice("TCL Q655", "Android TV")
+    val smartLamp = LampadaInteligente("PHILIPS HUE 60", "Lampada Philips")
     val central = CentralDeControle()
     
     central.adicionarDispositivo(smartTv)
+    central.adicionarDispositivo(smartLamp)
     central.ligarTodos()
     central.mostrarStatus()
     central.desligarTodos()
