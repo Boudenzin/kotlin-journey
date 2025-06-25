@@ -58,69 +58,91 @@ calculo = ::subtrair
 println("Resultado: ${calculo(20, 10)}") // Imprime: Resultado: 10
 ```
 
-## 4. Expressões Lambda: Funções Anônimas
+### 3.1. Tipos de Função Anuláveis
 
-Expressões Lambda são "literais de função", ou seja, funções que não são declaradas com `fun`, mas podem ser tratadas como expressões e passadas diretamente como argumentos.
+Assim como qualquer outro tipo em Kotlin, um tipo de função também pode ser anulável. Isso é útil quando a existência de uma função é opcional. Para declarar um tipo de função anulável, basta envolver o tipo entre parênteses e adicionar `?`.
 
-A sintaxe completa de uma lambda é: `{ parâmetros -> corpo }`.
+Sintaxe: `((Param1) -> Retorno)?`
+
+Para invocar uma função que pode ser nula, você deve usar a chamada segura `?.invoke()`.
 
 ```kotlin
-// Atribuindo uma expressão lambda a uma variável
-val multiplicar: (Int, Int) -> Int = { a: Int, b: Int -> a * b }
+// 'onFinalizado' é uma ação opcional que pode ser nula
+var onFinalizado: (() -> Unit)? = null // Recebe nada, retorna nada (Unit)
 
-// A lambda é o bloco dentro das chaves {}
-val saudar: (String) -> String = { nome: String -> "Bem-vindo, $nome!" }
+// Para chamar, usamos a chamada segura
+onFinalizado?.invoke() // Nada acontece, pois é nulo
+
+// Agora, atribuímos uma lambda a ela
+onFinalizado = { println("Processo finalizado com sucesso!") }
+
+// A chamada agora será executada
+onFinalizado?.invoke() // Imprime: Processo finalizado com sucesso!
+```
+
+## 4. Transmitir uma Função para Outra como Argumento (Higher-Order Functions)
+
+Uma função que recebe outra função como argumento ou retorna uma função é chamada de **Higher-Order Function** (Função de Ordem Superior). Este é um conceito central da programação funcional.
+
+```kotlin
+// 'executarOperacao' é uma Higher-Order Function.
+// Ela recebe dois inteiros e uma função 'operacao'.
+fun executarOperacao(a: Int, b: Int, operacao: (Int, Int) -> Int) {
+    val resultado = operacao(a, b)
+    println("O resultado da operação é $resultado")
+}
 
 fun main() {
-    println(multiplicar(5, 4)) // Imprime: 20
-    println(saudar("Kotlin"))  // Imprime: Bem-vindo, Kotlin!
+    // Passando a referência da função 'somar'
+    executarOperacao(10, 5, ::somar) // Saída: O resultado da operação é 15
+    
+    // Passando a referência da função 'subtrair'
+    executarOperacao(10, 5, ::subtrair) // Saída: O resultado da operação é 5
+    
+    // Passando uma lambda diretamente como argumento
+    executarOperacao(10, 5, { x, y -> x * y }) // Saída: O resultado da operação é 50
 }
 ```
+
+## 5. Expressões Lambda: A Forma Concisa
+
+Expressões Lambda são "literais de função", ou seja, funções anônimas que podemos passar diretamente como argumentos.
+
+A sintaxe completa de uma lambda é: `{ parâmetros -> corpo }`.
 
 ### Sintaxe Abreviada de Lambdas
 
 A verdadeira força das lambdas vem de sua sintaxe concisa. O compilador do Kotlin pode inferir muitas coisas, permitindo-nos abreviar a declaração.
 
-Vamos pegar uma função que recebe uma lambda, como a `map`, que transforma cada item de uma lista.
+Vamos usar a função `map`, que transforma cada item de uma lista, como exemplo.
 
 ```kotlin
 val numeros = listOf(1, 2, 3, 4, 5)
 ```
 
-**Forma 1: Sintaxe Completa**
-```kotlin
-val quadrados = numeros.map({ numero: Int -> numero * numero })
-// Resultado: [1, 4, 9, 16, 25]
-```
-
-**Forma 2: Inferência de Tipo**
-O compilador já sabe que `numeros` é uma lista de `Int`, então o tipo do parâmetro da lambda pode ser omitido.
-```kotlin
-val quadrados = numeros.map({ numero -> numero * numero })
-```
-
-**Forma 3: *Trailing Lambda***
+**Forma 1: *Trailing Lambda***
 Se uma lambda é o **último** argumento de uma função, ela pode ser movida para fora dos parênteses.
 ```kotlin
 val quadrados = numeros.map() { numero -> numero * numero }
 ```
 
-**Forma 4: *Trailing Lambda* com Parênteses Vazios Omitidos**
-Se a lambda é o **único** argumento, os parênteses podem ser removidos completamente.
+**Forma 2: *Trailing Lambda* com Parênteses Omitidos**
+Se a lambda é o **único** argumento (ou os outros têm valores padrão), os parênteses podem ser removidos.
 ```kotlin
 val quadrados = numeros.map { numero -> numero * numero }
 ```
 
-**Forma 5: O Parâmetro `it`**
+**Forma 3: O Parâmetro `it`**
 Se a lambda tem **apenas um parâmetro**, você pode omitir sua declaração e acessá-lo pela palavra-chave implícita `it`. Esta é a forma mais comum e idiomática.
 ```kotlin
 val quadrados = numeros.map { it * it }
 // 'it' aqui se refere a cada número da lista (1, depois 2, depois 3...)
+println(quadrados) // Saída: [1, 4, 9, 16, 25]
 ```
 
-## 5. A Função `repeat()`
+## 6. A Função `repeat()`
 
-A função `repeat()` da biblioteca padrão é um excelente exemplo de uso de *trailing lambdas*. Ela executa um bloco de código (uma lambda) um determinado número de vezes.
+A função `repeat()` da biblioteca padrão é um ótimo exemplo de uso de *trailing lambdas*. Ela executa um bloco de código (uma lambda) um determinado número de vezes.
 
 ```kotlin
 fun main() {
@@ -138,19 +160,6 @@ fun main() {
         println("Esta é a repetição número ${indice + 1}")
     }
 }
-```
-
-### Saída do Código Acima:
-```
-Contagem regressiva:
-Iniciando...
-Iniciando...
-Iniciando...
------
-Esta é a repetição número 1
-Esta é a repetição número 2
-Esta é a repetição número 3
-Esta é a repetição número 4
 ```
 
 Dominar funções, expressões e lambdas é fundamental para escrever um código Kotlin moderno, limpo e eficiente.
