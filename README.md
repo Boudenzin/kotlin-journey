@@ -22,6 +22,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | `GridLayout`  | Tela que dá explicações sobre os tipos de objetos em Compose                             | [`/month02-apps/week1/GridLayout/`](month02-apps/week1/GridLayout) |
 | `CartaoVisita`  | Tela que apresenta o cartão de visita                             | [`/month02-apps/week2/CartaoVisita/`](month02-apps/week2/CartaoVisita)|
 
+### Segunda Parte – Construindo a UI do aplicativo
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
