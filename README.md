@@ -30,9 +30,13 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 ## 📘 Anotações
 
-- [`state-management.md`](notes/state-management.md): Como funciona o gerenciamento de estado em Compose.
-- [`ui-basics`](notes/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
-- [`composable-functions`](notes/composable-functions.md): Anotações sobre funções com Composable
+- [`state-management.md`](notes/android-basicsstate-management.md): Como funciona o gerenciamento de estado em Compose.
+- [`ui-basics`](notes/android-basics/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
+- [`composable-functions`](notes/android-basics/composable-functions.md): Anotações sobre funções com Composable.
+- [`when-in-kotlin`](notes/kotlin-basics/when-in-kotlin.md): Documento que resume o when em kotlin.
+- [`nullability`](notes/kotlin-basics/nullability.md): Documento que fala sobre nulabilidade em kotlin.
+- [`ood`](notes/kotlin-basics/ood.md): Documento que fala sobre o básico ao avançado na Orientação aos Objetos.
+- [`functions-and-expressions`](notes/kotlin-basics/functions-and-expressions.md): Documento que fala sobre as funções e como elas podem se comportar em kotlin.
 ---
 
 ## 🛠️ Tecnologias
