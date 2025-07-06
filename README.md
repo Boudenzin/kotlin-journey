@@ -24,6 +24,10 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 ### Segunda Parte – Construindo a UI do aplicativo
 
+| Projeto       | Descrição                                                              | Caminho                                  |
+|--------------|------------------------------------------------------------------------|------------------------------------------|
+| `DiceRollerApp`  | App que rola um dado aleatoriamente                         | [`/month02-apps/week4/DiceRollerApp/`](month02-apps/week4/DiceRollerApp)|
+
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
 ---
