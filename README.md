@@ -27,6 +27,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
 | `DiceRollerApp`  | App que rola um dado aleatoriamente                         | [`/month02-apps/week4/DiceRollerApp/`](month02-apps/week4/DiceRollerApp)|
+| `LemonadeApp`  | App que espreme um limão para passar o tempo                         | [`/month03/week1/LemonadeApp/`](month03/week1/Lemonade) _(em_andamento)_|
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
