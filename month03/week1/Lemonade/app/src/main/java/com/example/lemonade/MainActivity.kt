@@ -45,6 +45,8 @@ fun MakeLemonade(modifier: Modifier = Modifier) {
 
     var lemonadePhase = remember { mutableStateOf(0) }
 
+    var tapsNeeded = remember { mutableStateOf(getRandomTapsNeeded()) }
+
     val lemonadeImage = when (lemonadePhase.value) {
         0 -> painterResource(id = R.drawable.lemon_tree)
         1 -> painterResource(id = R.drawable.lemon_squeeze)
@@ -74,7 +76,23 @@ fun MakeLemonade(modifier: Modifier = Modifier) {
     ){
 
         Button(
-            onClick = {lemonadePhase.value = (lemonadePhase.value + 1) % 4},
+            onClick = {
+                when (lemonadePhase.value) {
+                    0 -> {
+                        lemonadePhase.value = (lemonadePhase.value + 1) % 4
+                        tapsNeeded.value = getRandomTapsNeeded()
+                    }
+                    1 -> {
+                        tapsNeeded.value -= 1
+                        if (tapsNeeded.value <= 0) {
+                            lemonadePhase.value = 2
+                        }
+                    }
+                    else -> {
+                        lemonadePhase.value = (lemonadePhase.value + 1) % 4
+                    }
+                }
+            },
             shape = RoundedCornerShape(48.dp),
             colors = ButtonDefaults.buttonColors(colorResource(R.color.background_green))
         ) {
@@ -95,6 +113,10 @@ fun MakeLemonade(modifier: Modifier = Modifier) {
 
         )
     }
+}
+
+fun getRandomTapsNeeded(): Int {
+    return (2..8).random()
 }
 
 @Preview(showBackground = true)
