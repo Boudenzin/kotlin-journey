@@ -15,7 +15,11 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lemonade.ui.theme.LemonadeTheme
@@ -34,18 +39,43 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LemonadeTheme {
-                LemonadeApp()
+                LemonadeAppSpace(modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center))
             }
         }
     }
 }
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+@Composable
+fun LemonadeAppSpace( modifier: Modifier = Modifier) {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text(stringResource(id = R.string.app_name), fontWeight = FontWeight.Bold) },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                )
+            )
+        }
+    ) { innerPadding ->
+        MakeLemonade(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .wrapContentSize(Alignment.Center)
+        )
+    }
+}
+
+
 @Composable
 fun MakeLemonade(modifier: Modifier = Modifier) {
 
-    var lemonadePhase = remember { mutableStateOf(0) }
+    val lemonadePhase = remember { mutableStateOf(0) }
 
-    var tapsNeeded = remember { mutableStateOf(getRandomTapsNeeded()) }
+    val tapsNeeded = remember { mutableStateOf(getRandomTapsNeeded()) }
 
     val lemonadeImage = when (lemonadePhase.value) {
         0 -> painterResource(id = R.drawable.lemon_tree)
@@ -54,14 +84,14 @@ fun MakeLemonade(modifier: Modifier = Modifier) {
         else -> painterResource(id = R.drawable.lemon_restart)
     }
 
-    var lemonadeContent = when(lemonadePhase.value) {
+    val lemonadeContent = when(lemonadePhase.value) {
         0 -> stringResource(id = R.string.lemon_tree_content_description)
         1 -> stringResource(id = R.string.lemon_squeeze_content_description)
         2 -> stringResource(id = R.string.lemon_drink_content_description)
         else -> stringResource(id = R.string.lemon_restart_content_description)
     }
 
-    var sentenceLemonade = when (lemonadePhase.value) {
+    val sentenceLemonade = when (lemonadePhase.value) {
         0 -> stringResource(id = R.string.lemon_tree)
         1 -> stringResource(id = R.string.lemon_squeeze)
         2 -> stringResource(id = R.string.lemon_drink)
@@ -123,7 +153,7 @@ fun getRandomTapsNeeded(): Int {
 @Composable
 fun LemonadeApp() {
     LemonadeTheme {
-        MakeLemonade(modifier = Modifier
+        LemonadeAppSpace(modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center))
     }
