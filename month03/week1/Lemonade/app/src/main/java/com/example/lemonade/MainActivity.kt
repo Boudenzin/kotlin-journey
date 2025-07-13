@@ -21,8 +21,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -49,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
-fun LemonadeAppSpace( modifier: Modifier = Modifier) {
+fun LemonadeAppSpace(modifier: Modifier = Modifier) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -73,25 +75,25 @@ fun LemonadeAppSpace( modifier: Modifier = Modifier) {
 @Composable
 fun MakeLemonade(modifier: Modifier = Modifier) {
 
-    val lemonadePhase = remember { mutableStateOf(0) }
+    var lemonadePhase by remember { mutableIntStateOf(0) }
 
-    val tapsNeeded = remember { mutableStateOf(getRandomTapsNeeded()) }
+    var tapsNeeded by remember { mutableIntStateOf(getRandomTapsNeeded()) }
 
-    val lemonadeImage = when (lemonadePhase.value) {
+    val lemonadeImage = when (lemonadePhase) {
         0 -> painterResource(id = R.drawable.lemon_tree)
         1 -> painterResource(id = R.drawable.lemon_squeeze)
         2 -> painterResource(id = R.drawable.lemon_drink)
         else -> painterResource(id = R.drawable.lemon_restart)
     }
 
-    val lemonadeContent = when(lemonadePhase.value) {
+    val lemonadeContent = when(lemonadePhase) {
         0 -> stringResource(id = R.string.lemon_tree_content_description)
         1 -> stringResource(id = R.string.lemon_squeeze_content_description)
         2 -> stringResource(id = R.string.lemon_drink_content_description)
         else -> stringResource(id = R.string.lemon_restart_content_description)
     }
 
-    val sentenceLemonade = when (lemonadePhase.value) {
+    val sentenceLemonade = when (lemonadePhase) {
         0 -> stringResource(id = R.string.lemon_tree)
         1 -> stringResource(id = R.string.lemon_squeeze)
         2 -> stringResource(id = R.string.lemon_drink)
@@ -107,19 +109,19 @@ fun MakeLemonade(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
-                when (lemonadePhase.value) {
+                when (lemonadePhase) {
                     0 -> {
-                        lemonadePhase.value = (lemonadePhase.value + 1) % 4
-                        tapsNeeded.value = getRandomTapsNeeded()
+                        lemonadePhase = (lemonadePhase + 1) % 4
+                        tapsNeeded = getRandomTapsNeeded()
                     }
                     1 -> {
-                        tapsNeeded.value -= 1
-                        if (tapsNeeded.value <= 0) {
-                            lemonadePhase.value = 2
+                        tapsNeeded -= 1
+                        if (tapsNeeded <= 0) {
+                            lemonadePhase = 2
                         }
                     }
                     else -> {
-                        lemonadePhase.value = (lemonadePhase.value + 1) % 4
+                        lemonadePhase = (lemonadePhase + 1) % 4
                     }
                 }
             },
