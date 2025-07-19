@@ -27,7 +27,8 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
 | `DiceRollerApp`  | App que rola um dado aleatoriamente                         | [`/month02-apps/week4/DiceRollerApp/`](month02-apps/week4/DiceRollerApp)|
-| `LemonadeApp`  | App que espreme um limão para passar o tempo                         | [`/month03/week1/LemonadeApp/`](month03/week1/Lemonade) _(em_andamento)_|
+| `LemonadeApp`  | App que espreme um limão para passar o tempo                         | [`/month03/week1/LemonadeApp/`](month03/week1/Lemonade) |
+| `TipCalculator`  | Calculadora de gorjeta                         | [`/month03/week2/TipCalculator/`](month03/TipCalculator/basic-android-kotlin-compose-training-tip-calculator-starter/) |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
