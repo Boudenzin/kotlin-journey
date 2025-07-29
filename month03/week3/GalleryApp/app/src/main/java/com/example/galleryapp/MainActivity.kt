@@ -14,7 +14,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -53,6 +59,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GalleryWithDescription(modifier: Modifier = Modifier) {
+
+    val carouselCounter by remember { mutableIntStateOf(0)}
+
+    val artImage = when(carouselCounter) {
+        0 -> painterResource(R.drawable.autoportrait)
+        1 -> painterResource(R.drawable.rhytmic_lines)
+        2 -> painterResource(R.drawable.sisifo)
+        3 -> painterResource(R.drawable.stockholm)
+        else -> painterResource(R.drawable.dyogenes)
+    }
+
+    val artTitle = when(carouselCounter) {
+        0 -> stringResource(R.string.)
+    }
+
     Box() {
         Column {
             Image(
