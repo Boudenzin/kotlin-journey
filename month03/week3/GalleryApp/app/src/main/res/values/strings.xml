@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GalleryApp</string>
+    <string name="botao_prev">Anterior</string>
+    <string name="botao_next">Próximo</string>
 </resources>

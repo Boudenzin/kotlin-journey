@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -66,8 +67,12 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
                 )
             }
             Row {
-                Button() { //Botão anterior}
-                Button() { //Botão futuro}
+                Button(onClick = {}) {
+                    Text(stringResource(R.string.botao_prev))
+                }
+                Button(onClick = {}) {
+                    Text(stringResource(R.string.botao_next))
+                }
             }
         }
     }
