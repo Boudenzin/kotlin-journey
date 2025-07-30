@@ -71,7 +71,19 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
     }
 
     val artTitle = when(carouselCounter) {
-        0 -> stringResource(R.string.)
+        0 -> stringResource(R.string.artwork_title_0)
+        1 -> stringResource(R.string.artwork_title_1)
+        2 -> stringResource(R.string.artwork_title_2)
+        3 -> stringResource(R.string.artwork_title_3)
+        else -> stringResource(R.string.artwork_title_4)
+    }
+
+    val artistName = when(carouselCounter) {
+        0 -> stringResource(R.string.artwork_artist_0)
+        1 -> stringResource(R.string.artwork_artist_1)
+        2 -> stringResource(R.string.artwork_artist_2)
+        3 -> stringResource(R.string.artwork_artist_3)
+        else -> stringResource(R.string.artwork_artist_4)
     }
 
     Box() {
@@ -88,7 +100,16 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
                 )
             }
             Row {
-                Button(onClick = {}) {
+                Button(onClick = {
+                    when(carouselCounter) {
+                        -1 -> {carouselCounter = 4}
+
+                        else -> {
+                            carouselCounter = (carouselCounter -1)
+                        }
+
+                    }
+                }) {
                     Text(stringResource(R.string.botao_prev))
                 }
                 Button(onClick = {}) {
