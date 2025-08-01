@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,18 +15,22 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.galleryapp.ui.theme.GalleryAppTheme
 
 val ralewayFamily = FontFamily(
@@ -60,7 +65,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GalleryWithDescription(modifier: Modifier = Modifier) {
 
-    val carouselCounter by remember { mutableIntStateOf(0)}
+    var carouselCounter by remember { mutableIntStateOf(0)}
 
     val artImage = when(carouselCounter) {
         0 -> painterResource(R.drawable.autoportrait)
@@ -86,33 +91,64 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
         else -> stringResource(R.string.artwork_artist_4)
     }
 
-    Box() {
-        Column {
+    Box(
+        modifier = modifier.fillMaxSize()
+    ) {
+        Column (
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ){
             Image(
-                //Imagem que vai aparecer com um val
+                painter = artImage,
+                contentDescription = artTitle,
+                modifier = Modifier
+                    .shadow(elevation = 8.dp, shape = RectangleShape, ambientColor = Color.Black.copy(alpha = 0.5f), spotColor = Color.Black.copy(alpha = 0.5f))
+                    .padding(32.dp)
             )
-            Column {
+            Column (
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ){
                 Text(
-                    //Texto de titulo
+                    text = artTitle,
+                    fontFamily = ralewayFamily,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(8.dp)
                 )
                 Text(
-                    //Texto de subtitulo
+                    text = artistName,
+                    fontFamily = ralewayFamily,
+                    fontWeight = FontWeight.Light,
+                    modifier = Modifier.padding(8.dp)
                 )
             }
             Row {
                 Button(onClick = {
                     when(carouselCounter) {
-                        -1 -> {carouselCounter = 4}
+                        0 -> {carouselCounter = 4}
 
                         else -> {
-                            carouselCounter = (carouselCounter -1)
+                            carouselCounter -= 1
                         }
 
                     }
-                }) {
+                },
+                    modifier = Modifier
+                        .padding(16.dp)
+
+                ) {
                     Text(stringResource(R.string.botao_prev))
                 }
-                Button(onClick = {}) {
+                Button(onClick = {
+                    carouselCounter = (carouselCounter + 1) % 5
+                },
+                    modifier = Modifier
+                        .padding(16.dp)
+
+                ) {
                     Text(stringResource(R.string.botao_next))
                 }
             }
