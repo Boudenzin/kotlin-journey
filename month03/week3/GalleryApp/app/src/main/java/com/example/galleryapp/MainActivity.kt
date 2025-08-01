@@ -125,31 +125,30 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
                     modifier = Modifier.padding(8.dp)
                 )
             }
-            Row {
+            Row (
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ){
                 Button(onClick = {
-                    when(carouselCounter) {
-                        0 -> {carouselCounter = 4}
-
-                        else -> {
-                            carouselCounter -= 1
-                        }
-
-                    }
-                },
-                    modifier = Modifier
-                        .padding(16.dp)
+                    carouselCounter = (carouselCounter - 1 + 5) % 5 // Loop back to the last image if at the first one
+                }
 
                 ) {
-                    Text(stringResource(R.string.botao_prev))
+                    Text(
+                        stringResource(R.string.botao_prev),
+                        fontFamily = ralewayFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
                 Button(onClick = {
                     carouselCounter = (carouselCounter + 1) % 5
-                },
-                    modifier = Modifier
-                        .padding(16.dp)
+                }
 
                 ) {
-                    Text(stringResource(R.string.botao_next))
+                    Text(
+                        stringResource(R.string.botao_next),
+                        fontFamily = ralewayFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
             }
         }
