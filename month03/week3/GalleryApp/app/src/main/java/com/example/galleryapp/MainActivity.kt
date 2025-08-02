@@ -12,8 +12,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -45,13 +50,34 @@ val ralewayFamily = FontFamily(
     Font(R.font.raleway_heavy, FontWeight.Black)          // Peso 900 ("Heavy" geralmente mapeia para "Black")
 )
 
+data class Artwork(
+    val imageRes: Int,
+    val titleRes: Int,
+    val artistRes: Int
+)
 
+val artworks = listOf(
+    Artwork(R.drawable.autoportrait, R.string.artwork_title_0, R.string.artwork_artist_0),
+    Artwork(R.drawable.rhytmic_lines, R.string.artwork_title_1, R.string.artwork_artist_1),
+    Artwork(R.drawable.sisifo, R.string.artwork_title_2, R.string.artwork_artist_2),
+    Artwork(R.drawable.stockholm, R.string.artwork_title_3, R.string.artwork_artist_3),
+    Artwork(R.drawable.dyogenes, R.string.artwork_title_4, R.string.artwork_artist_4)
+
+)
+
+@OptIn(ExperimentalMaterial3Api:: class)
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             GalleryAppTheme {
+
+                val windowSizeClass = calculateWindowSizeClass(this)
+
+                GalleryApp(windowSizeClass = windowSizeClass)
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     GalleryWithDescription(
                         modifier = Modifier.padding(innerPadding)
@@ -61,6 +87,22 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Composable
+fun GalleryApp(windowSizeClass: WindowSizeClass) {
+
+    val widthSizeClass = windowSizeClass.widthSizeClass
+
+    when (widthSizeClass) {
+        WindowWidthSizeClass.Compact -> {
+            GalleryWithDescription(modifier = Modifier.fillMaxSize())
+        }
+        else -> {
+            GalleryWithDescriptionLandscape(modifier = Modifier.fillMaxSize())
+        }
+    }
+}
+
 
 @Composable
 fun GalleryWithDescription(modifier: Modifier = Modifier) {
