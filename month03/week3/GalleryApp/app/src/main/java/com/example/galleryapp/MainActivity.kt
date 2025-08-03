@@ -65,9 +65,8 @@ val artworks = listOf(
 
 )
 
-@OptIn(ExperimentalMaterial3Api:: class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -76,11 +75,73 @@ class MainActivity : ComponentActivity() {
 
                 val windowSizeClass = calculateWindowSizeClass(this)
 
-                GalleryApp(windowSizeClass = windowSizeClass)
 
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    GalleryWithDescription(
-                        modifier = Modifier.padding(innerPadding)
+                GalleryScreen(windowSizeClass = windowSizeClass)
+            }
+        }
+    }
+}
+
+@Composable
+fun LayoutEmRetrato(
+    artwork: Artwork,
+    onPreviousClick: () -> Unit,
+    onNextClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.fillMaxSize() // Usa o modifier recebido
+    ) {
+        Column (
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ){
+            // Usa o artwork recebido via parâmetro
+            Image(
+                painter = painterResource(artwork.imageRes),
+                contentDescription = stringResource(artwork.titleRes),
+                modifier = Modifier
+                    .shadow(elevation = 8.dp, shape = RectangleShape)
+                    .padding(32.dp)
+            )
+            Column (
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ){
+                // Usa o artwork recebido via parâmetro
+                Text(
+                    text = stringResource(artwork.titleRes),
+                    fontFamily = ralewayFamily,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = stringResource(artwork.artistRes),
+                    fontFamily = ralewayFamily,
+                    fontWeight = FontWeight.Light,
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
+            Row (
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ){
+                // Chama as funções recebidas via parâmetro
+                Button(onClick = onPreviousClick) {
+                    Text(
+                        stringResource(R.string.botao_prev),
+                        fontFamily = ralewayFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+                // Chama as funções recebidas via parâmetro
+                Button(onClick = onNextClick) {
+                    Text(
+                        stringResource(R.string.botao_next),
+                        fontFamily = ralewayFamily,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }
@@ -88,20 +149,42 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun GalleryApp(windowSizeClass: WindowSizeClass) {
+fun GalleryScreen(modifier: Modifier = Modifier, windowSizeClass: WindowSizeClass) {
 
-    val widthSizeClass = windowSizeClass.widthSizeClass
+    var carouselCounter by remember { mutableIntStateOf(0) }
+    val currentArt = artworks[carouselCounter]
 
-    when (widthSizeClass) {
+    fun handlePrevious() {
+        carouselCounter = (carouselCounter - 1 + artworks.size) % artworks.size
+    }
+
+    fun handleNext() {
+        carouselCounter = (carouselCounter + 1) % artworks.size
+    }
+
+    when (windowSizeClass.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
-            GalleryWithDescription(modifier = Modifier.fillMaxSize())
+            LayoutEmRetrato(
+                artwork = currentArt,
+                onPreviousClick = ::handlePrevious,
+                onNextClick = ::handleNext,
+                modifier = modifier
+            )
         }
+
         else -> {
-            GalleryWithDescriptionLandscape(modifier = Modifier.fillMaxSize())
+            LayoutEmPaisagem(
+                artwork = currentArt,
+                onPrevious = ::handlePrevious,
+                onNext = ::handleNext,
+                modifier = modifier
+            )
         }
     }
 }
+
 
 
 @Composable
@@ -109,29 +192,7 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
 
     var carouselCounter by remember { mutableIntStateOf(0)}
 
-    val artImage = when(carouselCounter) {
-        0 -> painterResource(R.drawable.autoportrait)
-        1 -> painterResource(R.drawable.rhytmic_lines)
-        2 -> painterResource(R.drawable.sisifo)
-        3 -> painterResource(R.drawable.stockholm)
-        else -> painterResource(R.drawable.dyogenes)
-    }
-
-    val artTitle = when(carouselCounter) {
-        0 -> stringResource(R.string.artwork_title_0)
-        1 -> stringResource(R.string.artwork_title_1)
-        2 -> stringResource(R.string.artwork_title_2)
-        3 -> stringResource(R.string.artwork_title_3)
-        else -> stringResource(R.string.artwork_title_4)
-    }
-
-    val artistName = when(carouselCounter) {
-        0 -> stringResource(R.string.artwork_artist_0)
-        1 -> stringResource(R.string.artwork_artist_1)
-        2 -> stringResource(R.string.artwork_artist_2)
-        3 -> stringResource(R.string.artwork_artist_3)
-        else -> stringResource(R.string.artwork_artist_4)
-    }
+    val currentArt = artworks[carouselCounter]
 
     Box(
         modifier = modifier.fillMaxSize()
@@ -144,8 +205,8 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.Center
         ){
             Image(
-                painter = artImage,
-                contentDescription = artTitle,
+                painter = painterResource(currentArt.imageRes),
+                contentDescription = stringResource(currentArt.titleRes),
                 modifier = Modifier
                     .shadow(elevation = 8.dp, shape = RectangleShape, ambientColor = Color.Black.copy(alpha = 0.5f), spotColor = Color.Black.copy(alpha = 0.5f))
                     .padding(32.dp)
@@ -155,13 +216,13 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.Center
             ){
                 Text(
-                    text = artTitle,
+                    text = stringResource(currentArt.titleRes),
                     fontFamily = ralewayFamily,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(8.dp)
                 )
                 Text(
-                    text = artistName,
+                    text = stringResource(currentArt.artistRes),
                     fontFamily = ralewayFamily,
                     fontWeight = FontWeight.Light,
                     modifier = Modifier.padding(8.dp)
@@ -197,10 +258,14 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     GalleryAppTheme {
-        GalleryWithDescription()
+        val windowSizeClass = calculateWindowSizeClass(this)
+
+
+        GalleryScreen(windowSizeClass = windowSizeClass)
     }
 }
