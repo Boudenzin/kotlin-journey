@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
@@ -27,7 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -65,7 +62,7 @@ val artworks = listOf(
 
 )
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,7 +146,6 @@ fun LayoutEmRetrato(
     }
 }
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun GalleryScreen(modifier: Modifier = Modifier, windowSizeClass: WindowSizeClass) {
 
@@ -177,76 +173,79 @@ fun GalleryScreen(modifier: Modifier = Modifier, windowSizeClass: WindowSizeClas
         else -> {
             LayoutEmPaisagem(
                 artwork = currentArt,
-                onPrevious = ::handlePrevious,
-                onNext = ::handleNext,
+                onPreviousClick = ::handlePrevious,
+                onNextClick = ::handleNext,
                 modifier = modifier
             )
         }
     }
 }
 
-
-
 @Composable
-fun GalleryWithDescription(modifier: Modifier = Modifier) {
-
-    var carouselCounter by remember { mutableIntStateOf(0)}
-
-    val currentArt = artworks[carouselCounter]
-
-    Box(
-        modifier = modifier.fillMaxSize()
+fun LayoutEmPaisagem(
+    artwork: Artwork,
+    onPreviousClick: () -> Unit,
+    onNextClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    // 1. Row como contêiner principal
+    Row(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp), // Um padding geral para a tela
+        verticalAlignment = Alignment.CenterVertically // Alinha as duas colunas verticalmente
     ) {
-        Column (
-            modifier = Modifier
-                .align(Alignment.Center)
-                .padding(8.dp),
+        // 2. Lado Esquerdo: A Imagem
+        Column(
+            modifier = Modifier.weight(1f), // Ocupa metade da largura
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
-        ){
+        ) {
             Image(
-                painter = painterResource(currentArt.imageRes),
-                contentDescription = stringResource(currentArt.titleRes),
+                painter = painterResource(artwork.imageRes),
+                contentDescription = stringResource(artwork.titleRes),
                 modifier = Modifier
-                    .shadow(elevation = 8.dp, shape = RectangleShape, ambientColor = Color.Black.copy(alpha = 0.5f), spotColor = Color.Black.copy(alpha = 0.5f))
-                    .padding(32.dp)
+                    .shadow(elevation = 8.dp, shape = RectangleShape)
+                    .padding(16.dp) // Um padding um pouco menor para a paisagem
             )
-            Column (
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ){
+        }
+
+        // 3. Lado Direito: Informações e Botões
+        Column(
+            modifier = Modifier.weight(1f), // Ocupa a outra metade da largura
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            // Bloco de Texto
+            Column(
+                modifier = Modifier.padding(bottom = 24.dp), // Espaço entre o texto e os botões
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
-                    text = stringResource(currentArt.titleRes),
+                    text = stringResource(artwork.titleRes),
                     fontFamily = ralewayFamily,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(8.dp)
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = stringResource(currentArt.artistRes),
+                    text = stringResource(artwork.artistRes),
                     fontFamily = ralewayFamily,
                     fontWeight = FontWeight.Light,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(top = 8.dp)
                 )
             }
-            Row (
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ){
-                Button(onClick = {
-                    carouselCounter = (carouselCounter - 1 + 5) % 5 // Loop back to the last image if at the first one
-                }
 
-                ) {
+            // Bloco de Botões
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Button(onClick = onPreviousClick) {
                     Text(
                         stringResource(R.string.botao_prev),
                         fontFamily = ralewayFamily,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
-                Button(onClick = {
-                    carouselCounter = (carouselCounter + 1) % 5
-                }
-
-                ) {
+                Button(onClick = onNextClick) {
                     Text(
                         stringResource(R.string.botao_next),
                         fontFamily = ralewayFamily,
@@ -258,14 +257,31 @@ fun GalleryWithDescription(modifier: Modifier = Modifier) {
     }
 }
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Modo Retrato")
 @Composable
-fun GreetingPreview() {
+fun LayoutEmRetratoPreview() {
     GalleryAppTheme {
-        val windowSizeClass = calculateWindowSizeClass(this)
+        // Crie dados de exemplo para o preview
+        val artworkDeExemplo = artworks[0] // Pega a primeira obra da sua lista
 
+        LayoutEmRetrato(
+            artwork = artworkDeExemplo,
+            onPreviousClick = {}, // Pode passar lambdas vazios, já que não serão clicados no preview
+            onNextClick = {}
+        )
+    }
+}
 
-        GalleryScreen(windowSizeClass = windowSizeClass)
+@Preview(showBackground = true, name = "Modo Paisagem", widthDp = 800, heightDp = 400)
+@Composable
+fun LayoutEmPaisagemPreview() {
+    GalleryAppTheme {
+        val artworkDeExemplo = artworks[0]
+
+        LayoutEmPaisagem(
+            artwork = artworkDeExemplo,
+            onPreviousClick = {},
+            onNextClick = {}
+        )
     }
 }
