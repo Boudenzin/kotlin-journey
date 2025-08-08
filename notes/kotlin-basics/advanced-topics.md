@@ -38,7 +38,60 @@ fun main() {
 }
 ```
 
-## 2. Usar uma Classe de Enumeração (`enum class`)
+## 2. `data class`: Classes para Armazenar Dados
+
+Uma `data class` (classe de dados) é um tipo especial de classe em Kotlin, otimizada para um único propósito: **armazenar dados**. Quando você declara uma classe como `data`, o compilador do Kotlin gera automaticamente várias funções úteis que, de outra forma, você teria que escrever manualmente.
+
+### Declaração Básica
+
+Para criar uma `data class`, basta adicionar a palavra-chave `data` antes de `class`.
+
+```kotlin
+data class Usuario(val id: Int, val nome: String, val email: String)
+```
+
+### O que o Compilador Gera para Você?
+
+Ao declarar a `data class` `Usuario` acima, o compilador gera automaticamente:
+
+1.  **`.equals()` e `.hashCode()`**:
+    * Verifica a igualdade estrutural, não a de referência. Dois objetos de uma `data class` são considerados iguais se todas as suas propriedades forem iguais.
+    * O `hashCode` é calculado com base nas propriedades, garantindo consistência com o `equals`.
+
+    ```kotlin
+    val usuario1 = Usuario(1, "Ana", "ana@email.com")
+    val usuario2 = Usuario(1, "Ana", "ana@email.com")
+    val usuario3 = Usuario(2, "Carlos", "carlos@email.com")
+
+    println(usuario1 == usuario2) // true
+    println(usuario1 == usuario3) // false
+    ```
+
+2.  **`.toString()`**:
+    * Fornece uma representação em string legível e informativa do objeto, mostrando o nome da classe e suas propriedades.
+
+    ```kotlin
+    println(usuario1) // Saída: Usuario(id=1, nome=Ana, email=ana@email.com)
+    ```
+
+3.  **`.copy()`**:
+    * Permite criar uma cópia de um objeto, modificando opcionalmente algumas de suas propriedades. Isso é muito útil para trabalhar com imutabilidade.
+
+    ```kotlin
+    val usuarioAnaAtualizado = usuario1.copy(email = "ana.silva@email.com")
+    println(usuarioAnaAtualizado) // Saída: Usuario(id=1, nome=Ana, email=ana.silva@email.com)
+    ```
+
+4.  **`.componentN()`**:
+    * Funções que permitem a **desestruturação** da classe, ou seja, extrair seus valores para variáveis separadas.
+
+    ```kotlin
+    val (id, nome, email) = usuario1
+    println("ID: $id, Nome: $nome, Email: $email") // Saída: ID: 1, Nome: Ana, Email: ana@email.com
+    ```
+
+
+## 3. Usar uma Classe de Enumeração (`enum class`)
 
 Classes de enumeração (`enum class`) são usadas para representar um conjunto fixo de constantes. São ideais para modelar conceitos que têm um número limitado de valores possíveis, como dias da semana, status de uma requisição ou naipes de um baralho.
 
