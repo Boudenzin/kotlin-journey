@@ -29,7 +29,12 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | `DiceRollerApp`  | App que rola um dado aleatoriamente                         | [`/month02-apps/week4/DiceRollerApp/`](month02-apps/week4/DiceRollerApp)|
 | `LemonadeApp`  | App que espreme um limão para passar o tempo                         | [`/month03/week1/LemonadeApp/`](month03/week1/Lemonade) |
 | `TipCalculator`  | Calculadora de gorjeta                         | [`/month03/week2/TipCalculator/`](month03/TipCalculator/basic-android-kotlin-compose-training-tip-calculator-starter/) |
-| `GalleryApp`  | App que mostra fotos das minhas paisagens que eu já tirei, com algumas descrições, algo como um acervo                         | [`/month03/week3/GalleryApp/`](month03/week1/Lemonade) _em andamento e desenvolvido por mim_|
+| `GalleryApp`  | App que mostra pinturas de artes com autor, titulo e ano com responsividade                         | [`/month03/week3/GalleryApp/`](month03/week3/GalleryApp) |
+
+### Terceira Parte – Aprofundamento em Material Design
+
+| Projeto       | Descrição                                                              | Caminho                                  |
+| `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month03-apps/week1/Scrollable/`](month03-apps/week3/Scrollable)  _em andamento_|
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
