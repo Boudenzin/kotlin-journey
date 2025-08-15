@@ -34,6 +34,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 ### Terceira Parte – Aprofundamento em Material Design
 
 | Projeto       | Descrição                                                              | Caminho                                  |
+|--------------|------------------------------------------------------------------------|------------------------------------------|
 | `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month03-apps/week1/Scrollable/`](month03-apps/week3/Scrollable)  _em andamento_|
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
