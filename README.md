@@ -35,7 +35,8 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month03-apps/week1/Scrollable/`](month03-apps/week3/Scrollable)  _em andamento_|
+| `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month04/week1/Scrollable/`](month03-apps/week1/Scrollable) |
+| `Scrollable/Affirmations`  | App que mostra matérias de um curso e integrantes                    | [`/month04/week2/Courses/`](month03-apps/week2/Courses) |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
