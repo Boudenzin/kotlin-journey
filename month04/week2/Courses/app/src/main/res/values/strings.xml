@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">Courses</string>
     <string name="architecture">Architecture</string>
     <string name="crafts">Crafts</string>
     <string name="business">Business</string>
