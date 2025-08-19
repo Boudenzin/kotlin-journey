@@ -6,23 +6,28 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.courses.data.DataSource
@@ -47,7 +52,7 @@ fun CoursesApp() {
 
     Surface (
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .statusBarsPadding()
             .padding(
                 start = WindowInsets.safeDrawing.asPaddingValues().calculateStartPadding(layoutDirection),
@@ -63,18 +68,34 @@ fun CoursesApp() {
 
 @Composable
 fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
-    Card {
-        Row(modifier = modifier.padding(16.dp)) {
+    Card (modifier = Modifier.fillMaxSize()){
+        Row {
             Image(
                 painter = painterResource(id = topic.imageResourceId),
                 contentDescription = null,
-                modifier = Modifier.weight(1f)
             )
 
-            Text(
-                text = LocalContext.current.getString(topic.stringResourceId),
-                modifier = Modifier.weight(2f).padding(start = 16.dp)
-            )
+            Column (modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)){
+
+                Text(
+                    text = LocalContext.current.getString(topic.stringResourceId),
+                    modifier = Modifier.weight(2f).padding(start = 16.dp)
+                )
+                Row (
+                    modifier = Modifier.padding(top = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically // Alinha o ícone e o texto verticalmente
+                ){
+                    Icon(
+                        painter = painterResource(R.drawable.ic_grain),
+                        contentDescription = null,
+                        modifier.padding(end = 8.dp)
+
+                    )
+                    Text(
+                        text = topic.numberOfCourses.toString()
+                    )
+                }
+            }
         }
     }
 }
@@ -85,7 +106,8 @@ fun TopicsList(topicList: List<Topic>, modifier: Modifier = Modifier) {
         items(topicList) {topic ->
             TopicCard(
                 topic = topic,
-                modifier = Modifier.padding(9.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
             )
         }
     }
