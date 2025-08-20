@@ -44,6 +44,8 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 ## 📘 Anotações
 
+As anotações agora estão divididas em duas partes, em android-basics e em kotlin-basics, para diferenciar a parte do compose com a do kotlin
+
 - [`state-management.md`](notes/android-basicsstate-management.md): Como funciona o gerenciamento de estado em Compose.
 - [`ui-basics`](notes/android-basics/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
 - [`composable-functions`](notes/android-basics/composable-functions.md): Anotações sobre funções com Composable.
