@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -16,8 +17,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -87,6 +90,7 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
                 Text(
                     text = LocalContext.current.getString(topic.stringResourceId),
                     style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
                 Row (
                     modifier = Modifier.padding(top = 8.dp),
@@ -95,7 +99,8 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
                     Icon(
                         painter = painterResource(R.drawable.ic_grain),
                         contentDescription = null,
-                        modifier.padding(end = 8.dp)
+                        modifier.padding(end = 8.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
 
                     )
                     Text(
@@ -110,12 +115,16 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
 
 @Composable
 fun TopicsList(topicList: List<Topic>, modifier: Modifier = Modifier) {
-    LazyColumn (modifier = modifier){
-        items(topicList) {topic ->
+
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier.padding(8.dp),
+    ) {
+        items(topicList) { topic ->
             TopicCard(
-                topic = topic,
-                modifier = Modifier
-                    .fillMaxWidth()
+                topic = topic
             )
         }
     }
@@ -124,5 +133,5 @@ fun TopicsList(topicList: List<Topic>, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun TopicCardPreview() {
-    TopicCard(Topic(R.string.film, 165, R.drawable.film))
+    CoursesApp()
 }
