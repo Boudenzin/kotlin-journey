@@ -35,8 +35,9 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month04/week1/Scrollable/`](month03-apps/week1/Scrollable) |
-| `Courses`  | App que mostra matérias de um curso e integrantes                    | [`/month04/week2/Courses/`](month03-apps/week2/Courses) |
+| `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month04/week1/Scrollable/`](/month04/week1/Scrollable/) |
+| `Courses`  | App que mostra matérias de um curso e integrantes                    | [`/month04/week2/Courses/`](/month04/week2/Courses/) |
+| `Woof`  | App que mostra cachorros a serem adotados                    | [`/month04/week3/Woof/`](/month04/week3/Woof/) |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
