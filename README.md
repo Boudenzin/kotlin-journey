@@ -38,6 +38,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month04/week1/Scrollable/`](/month04/week1/Scrollable/) |
 | `Courses`  | App que mostra matérias de um curso e integrantes                    | [`/month04/week2/Courses/`](/month04/week2/Courses/) |
 | `Woof`  | App que mostra cachorros a serem adotados                    | [`/month04/week3/Woof/`](/month04/week3/Woof/) |
+| `Superheroes`  | App que mostra descrições de super-heróis                    | [`/month04/week4/Superheroes/`](/month04/week4/Superheroes/) |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
@@ -47,14 +48,21 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 As anotações agora estão divididas em duas partes, em android-basics e em kotlin-basics, para diferenciar a parte do compose com a do kotlin
 
-- [`state-management.md`](notes/android-basicsstate-management.md): Como funciona o gerenciamento de estado em Compose.
-- [`ui-basics`](notes/android-basics/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
-- [`composable-functions`](notes/android-basics/composable-functions.md): Anotações sobre funções com Composable.
-- [`when-in-kotlin`](notes/kotlin-basics/when-in-kotlin.md): Documento que resume o when em kotlin.
+### Kotlin Basics Notes
+- [`advanced-topics`](notes/kotlin-basics/advanced-topics.md): Documento sobre tópicos avançados em Kotlin
+- [`collection-in-kotlin`](notes/kotlin-basics/collection-in-kotlin.md): Documento sobre coleções e funções avançadas de coleção.
+- [`functions-and-expressions`](notes/kotlin-basics/functions-and-expressions.md): Documento que fala sobre as funções e como elas podem se comportar em kotlin.
 - [`nullability`](notes/kotlin-basics/nullability.md): Documento que fala sobre nulabilidade em kotlin.
 - [`ood`](notes/kotlin-basics/ood.md): Documento que fala sobre o básico ao avançado na Orientação aos Objetos.
-- [`functions-and-expressions`](notes/kotlin-basics/functions-and-expressions.md): Documento que fala sobre as funções e como elas podem se comportar em kotlin.
-- [`button`](notes/kotlin-basics/buttons-and-remember.md): Documento sobre botões em kotlin
+- [`when-in-kotlin`](notes/kotlin-basics/when-in-kotlin.md): Documento que resume o when em kotlin.
+
+
+### Android Basics Notes
+- [`button`](notes/android-basics/buttons-and-remember.md): Documento sobre botões em kotlin
+- [`colors`](notes/android-basics/colors.md)
+- [`composable-functions`](notes/android-basics/composable-functions.md): Anotações sobre funções com Composable.
+- [`state-management.md`](notes/android-basicsstate-management.md): Como funciona o gerenciamento de estado em Compose.
+- [`ui-basics`](notes/android-basics/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
 ---
 
 ## 🛠️ Tecnologias
