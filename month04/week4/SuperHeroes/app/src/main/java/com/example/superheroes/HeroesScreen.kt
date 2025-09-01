@@ -1,6 +1,5 @@
 package com.example.superheroes
 
-import android.graphics.Paint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -59,9 +57,9 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
                 Image(
                     painter = painterResource(id = hero.imageRes),
                     contentDescription = null,
-                    align = Alignment.TopCenter,
                     contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.clip(RoundedCornerShape(8.dp))
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
                 )
             }
         }
@@ -76,7 +74,11 @@ fun HeroListItemPreview() {
         hero = Hero(
             nameRes = R.string.hero1,
             descriptionRes = R.string.description1,
-            imageRes = R.drawable.android_superhero1
+            imageRes = R.drawable.android_superhero1,
+            powerLevel = 85,
+            originRes = R.string.hero1_origin,
+            firstAppearanceRes = R.string.hero1_first_appearance,
+            abilitiesRes = R.array.hero1_abilities
         )
     )
 }

@@ -1,15 +1,61 @@
 <resources>
-    <string name="app_name">Superheroes</string>
-    <string name="hero1">Nick the Night and Day</string>
-    <string name="description1">The Jetpack Hero</string>
-    <string name="hero2">Reality Protector</string>
-    <string name="description2">Understands the absolute truth</string>
-    <string name="hero3">Andre the Giant</string>
-    <string name="description3">Mimics the light and night to blend in</string>
-    <string name="hero4">Benjamin the Brave</string>
-    <string name="description4">Harnesses the power of canary to develop bravely</string>
-    <string name="hero5">Magnificent Maru</string>
-    <string name="description5">Effortlessly glides in to save the day</string>
-    <string name="hero6">Dynamic Yasmine</string>
-    <string name="description6">Ability to shift to any form and energize</string>
+    <string name="app_name">Super-Heróis</string>
+
+    <string name="hero1">Nick Noite e Dia</string>
+    <string name="description1">O Herói do Jetpack</string>
+    <string name="hero1_origin">Neo City</string>
+    <string name="hero1_first_appearance">Crônicas de Jetpack nº 1 (2018)</string>
+    <string-array name="hero1_abilities">
+        <item>Voo</item>
+        <item>Supervelocidade</item>
+        <item>Manobras Aéreas</item>
+    </string-array>
+
+    <string name="hero2">Protetor da Realidade</string>
+    <string name="description2">Compreende a verdade absoluta</string>
+    <string name="hero2_origin">Dimensão Paralela Z-12</string>
+    <string name="hero2_first_appearance">Arquivos da Realidade nº 3 (2019)</string>
+    <string-array name="hero2_abilities">
+        <item>Controle de realidades</item>
+        <item>Visão da verdade absoluta</item>
+        <item>Telepatia limitada</item>
+    </string-array>
+
+    <string name="hero3">André, o Gigante</string>
+    <string name="description3">Mimetiza a luz e a noite para se camuflar</string>
+    <string name="hero3_origin">Floresta da Penumbra</string>
+    <string name="hero3_first_appearance">Lendas das Sombras nº 7 (2016)</string>
+    <string-array name="hero3_abilities">
+        <item>Camuflagem total</item>
+        <item>Força ampliada à noite</item>
+    </string-array>
+
+    <string name="hero4">Benjamin, o Valente</string>
+    <string name="description4">Canaliza a coragem do canário para lutar bravamente</string>
+    <string name="hero4_origin">Montanhas de Canária</string>
+    <string name="hero4_first_appearance">Saga da Bravura nº 2 (2020)</string>
+    <string-array name="hero4_abilities">
+        <item>Canto inspirador</item>
+        <item>Escudo sonoro</item>
+        <item>Força sobre-humana</item>
+    </string-array>
+
+    <string name="hero5">Maru, a Magnífica</string>
+    <string name="description5">Plana sem esforço para salvar o dia</string>
+    <string name="hero5_origin">Arquipélago Maru</string>
+    <string name="hero5_first_appearance">Resgate nos Céus nº 5 (2017)</string>
+    <string-array name="hero5_abilities">
+        <item>Planar longas distâncias</item>
+        <item>Agilidade felina</item>
+    </string-array>
+
+    <string name="hero6">Yasmine Dinâmica</string>
+    <string name="description6">Capacidade de mudar de forma e se energizar</string>
+    <string name="hero6_origin">Laboratório Secreto Y-9</string>
+    <string name="hero6_first_appearance">Mudança Dinâmica nº 1 (2021)</string>
+    <string-array name="hero6_abilities">
+        <item>Metamorfose</item>
+        <item>Regeneração rápida</item>
+        <item>Energia vital ilimitada</item>
+    </string-array>
 </resources>
