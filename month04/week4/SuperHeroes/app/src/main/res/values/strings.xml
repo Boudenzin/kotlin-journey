@@ -58,4 +58,6 @@
         <item>Regeneração rápida</item>
         <item>Energia vital ilimitada</item>
     </string-array>
+
+    <string name="expand_button_content_description">Saiba Mais</string>
 </resources>

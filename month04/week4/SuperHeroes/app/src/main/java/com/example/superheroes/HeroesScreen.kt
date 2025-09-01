@@ -11,8 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +41,7 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .height(72.dp)
+                .height(108.dp)
         ){
             Column(
                 modifier = Modifier.weight(1f)
@@ -48,6 +54,16 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
                     text = stringResource(hero.descriptionRes),
                     style = MaterialTheme.typography.bodyLarge
                 )
+                Spacer(modifier = Modifier.height(8.dp))
+                IconButton(
+                    onClick = {}
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.ExpandMore,
+                        contentDescription = stringResource(R.string.expand_button_content_description),
+                        tint = MaterialTheme.colorScheme.secondary
+                    )
+                }
 
             }
             Spacer(modifier = Modifier.width(16.dp))
@@ -65,7 +81,7 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
         }
     }
 }
-//TODO: FAZER A IMPLEMENTAÇÃO DAS NOVAS DESCRIÇÕES COM UM EXPAND MORE
+
 @Preview(showBackground = true)
 @Composable
 fun HeroListItemPreview() {
