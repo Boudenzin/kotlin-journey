@@ -1,5 +1,6 @@
 package com.example.superheroes
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,18 +31,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.superheroes.model.Hero
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
+
+    var expanded by remember { mutableStateOf(false) }
+
     Card (
         elevation = CardDefaults.cardElevation(2.dp),
         modifier = modifier
+            .animateContentSize()
     ) {
         Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .height(108.dp)
+            verticalAlignment = Alignment.CenterVertically
         ){
             Column(
                 modifier = Modifier.weight(1f)
@@ -54,12 +63,19 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
                     text = stringResource(hero.descriptionRes),
                     style = MaterialTheme.typography.bodyLarge
                 )
+
+                if (expanded) {
+                    HeroDetails(hero = hero)
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 IconButton(
-                    onClick = {}
+                    onClick = {
+                        expanded = !expanded
+                    }
                 ) {
+                    val icon = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore
                     Icon(
-                        imageVector = Icons.Filled.ExpandMore,
+                        imageVector = icon,
                         contentDescription = stringResource(R.string.expand_button_content_description),
                         tint = MaterialTheme.colorScheme.secondary
                     )
@@ -78,6 +94,32 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
                         .clip(RoundedCornerShape(8.dp))
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun HeroDetails(hero: Hero, modifier: Modifier = Modifier) {
+
+    val abilitiesArray = LocalContext.current.resources.getStringArray(hero.abilitiesRes)
+
+    Column(modifier = modifier
+        .padding(
+            start = 16.dp, top = 8.dp, bottom = 16.dp, end = 16.dp
+        )
+    ) {
+        Text(text = "Origem: ${stringResource(id = hero.originRes)}")
+        Text(text = "Primeira Aparição: ${stringResource(id = hero.firstAppearanceRes)}")
+        Text(text = "Nível de Poder: ${hero.powerLevel}")
+
+        Text(
+            text = "Habilidades:",
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 4.dp, bottom = 2.dp)
+        )
+
+        abilitiesArray.forEach { ability ->
+            Text(text = "• $ability") // Adiciona um marcador de tópico para estilo
         }
     }
 }
