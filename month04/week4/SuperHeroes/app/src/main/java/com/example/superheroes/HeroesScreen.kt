@@ -1,43 +1,48 @@
 package com.example.superheroes
 
+import SuperheroesTheme
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.superheroes.model.Hero
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.superheroes.model.Hero
+import com.example.superheroes.model.HeroesRepository
 
 @Composable
 fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
@@ -50,6 +55,7 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
             .animateContentSize()
     ) {
         Row (
+            modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ){
             Column(
@@ -71,7 +77,8 @@ fun HeroListItem(hero: Hero, modifier: Modifier = Modifier) {
                 IconButton(
                     onClick = {
                         expanded = !expanded
-                    }
+                    },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
                 ) {
                     val icon = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore
                     Icon(
@@ -114,7 +121,7 @@ fun HeroDetails(hero: Hero, modifier: Modifier = Modifier) {
 
         Text(
             text = "Habilidades:",
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(top = 4.dp, bottom = 2.dp)
         )
 
@@ -124,19 +131,38 @@ fun HeroDetails(hero: Hero, modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HeroesApp() {
+    Scaffold (
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.displayLarge
+                    )
+                }
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn (
+            contentPadding = innerPadding
+        ){
+           items(HeroesRepository.heroes) { hero ->
+               HeroListItem(
+                   hero = hero,
+                   modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+               )
+           }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
-fun HeroListItemPreview() {
-    // Exemplo de como o Preview ficaria
-    HeroListItem(
-        hero = Hero(
-            nameRes = R.string.hero1,
-            descriptionRes = R.string.description1,
-            imageRes = R.drawable.android_superhero1,
-            powerLevel = 85,
-            originRes = R.string.hero1_origin,
-            firstAppearanceRes = R.string.hero1_first_appearance,
-            abilitiesRes = R.array.hero1_abilities
-        )
-    )
+fun HeroesAppPreview() {
+    SuperheroesTheme { // Use o nome do seu tema
+        HeroesApp()
+    }
 }
