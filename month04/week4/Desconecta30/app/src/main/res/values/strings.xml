@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Desconecta30</string>
+
+    <string name="semana_1_titulo">Semana 1: A Limpeza Geral</string>
+    <string name="dia_1_titulo">Dia 1</string>
+    <string name="tip_dia_01">Desative todas as notificações não essenciais no seu celular (exceto chamadas e mensagens importantes).</string>
+    <string name="dia_2_titulo">Dia 2</string>
+    <string name="tip_dia_02">Cancele a assinatura de 5 newsletters que você não lê mais.</string>
+    <string name="dia_3_titulo">Dia 3</string>
+    <string name="tip_dia_03">Organize a tela inicial do seu celular, deixando apenas os aplicativos que você usa diariamente.</string>
+    <string name="dia_4_titulo">Dia 4</string>
+    <string name="tip_dia_04">Delete 10 aplicativos que você não usou nos últimos 30 dias.</string>
+    <string name="dia_5_titulo">Dia 5</string>
+    <string name="tip_dia_05">Limpe as fotos e vídeos da sua galeria. Apague 50 arquivos que você não precisa.</string>
+    <string name="dia_6_titulo">Dia 6</string>
+    <string name="tip_dia_06">Limpe a sua área de trabalho no computador, salvando os arquivos em pastas organizadas.</string>
+    <string name="dia_7_titulo">Dia 7</string>
+    <string name="tip_dia_07">Desinstale os programas do seu computador que você não utiliza há mais de 3 meses.</string>
+
+    <string name="semana_2_titulo">Semana 2: O Foco e a Consciência</string>
+    <string name="dia_8_titulo">Dia 8</string>
+    <string name="tip_dia_08">Passe um dia sem olhar para as redes sociais antes das 10h da manhã.</string>
+    <string name="dia_9_titulo">Dia 9</string>
+    <string name="tip_dia_09">Use um aplicativo ou a função nativa do seu celular para monitorar o seu tempo de tela.</string>
+    <string name="dia_10_titulo">Dia 10</string>
+    <string name="tip_dia_10">Esconda ou silencie grupos de mensagens que são muito ativos e que não são essenciais para você.</string>
+    <string name="dia_11_titulo">Dia 11</string>
+    <string name="tip_dia_11">Deixe o celular em outro cômodo enquanto você come ou assiste a um filme.</string>
+    <string name="dia_12_titulo">Dia 12</string>
+    <string name="tip_dia_12">Desafie-se a não usar o celular em qualquer fila de espera. Observe o ambiente ao seu redor.</string>
+    <string name="dia_13_titulo">Dia 13</string>
+    <string name="tip_dia_13">Faça uma lista de 5 coisas que você faria se não tivesse acesso à internet por uma hora.</string>
+    <string name="dia_14_titulo">Dia 14</string>
+    <string name="tip_dia_14">Passe 30 minutos em silêncio e sem distrações digitais (celular, televisão, computador).</string>
+
+    <string name="semana_3_titulo">Semana 3: O Equilíbrio Pessoal</string>
+    <string name="dia_15_titulo">Dia 15</string>
+    <string name="tip_dia_15">Use o Google Docs ou um aplicativo de notas para criar um "banco de ideias" de coisas para fazer offline.</string>
+    <string name="dia_16_titulo">Dia 16</string>
+    <string name="tip_dia_16">Dedique 15 minutos para responder a e-mails e, em seguida, feche o aplicativo.</string>
+    <string name="dia_17_titulo">Dia 17</string>
+    <string name="tip_dia_17">Apague ou arquive conversas antigas que não são mais relevantes para você.</string>
+    <string name="dia_18_titulo">Dia 18</string>
+    <string name="tip_dia_18">Faça uma ligação para um amigo ou familiar em vez de mandar uma mensagem de texto.</string>
+    <string name="dia_19_titulo">Dia 19</string>
+    <string name="tip_dia_19">Leia as notícias em um jornal ou revista física em vez de online.</string>
+    <string name="dia_20_titulo">Dia 20</string>
+    <string name="tip_dia_20">Encontre uma receita nova e cozinhe usando um livro de receitas, não um vídeo no YouTube.</string>
+    <string name="dia_21_titulo">Dia 21</string>
+    <string name="tip_dia_21">Faça um detox de 24 horas. Evite qualquer tela durante este período.</string>
+
+    <string name="semana_4_titulo">Semana 4: A Sustentabilidade Digital</string>
+    <string name="dia_22_titulo">Dia 22</string>
+    <string name="tip_dia_22">Faça uma lista de suas 3 redes sociais favoritas e determine um horário específico para usá-las.</string>
+    <string name="dia_23_titulo">Dia 23</string>
+    <string name="tip_dia_23">Crie uma lista de reprodução (playlist) de músicas para o foco, sem letras que te distraiam.</string>
+    <string name="dia_24_titulo">Dia 24</string>
+    <string name="tip_dia_24">Mude a foto de fundo do seu celular para uma imagem que te lembre de desconectar.</string>
+    <string name="dia_25_titulo">Dia 25</string>
+    <string name="tip_dia_25">Crie um "ritual da noite" de 30 minutos, como ler, meditar ou alongar, sem usar o celular.</string>
+    <string name="dia_26_titulo">Dia 26</string>
+    <string name="tip_dia_26">Faça uma lista de 5 pessoas que você segue nas redes sociais e que não te inspiram. Deixe de segui-las.</string>
+    <string name="dia_27_titulo">Dia 27</string>
+    <string name="tip_dia_27">Revise as suas metas de uso de tela e ajuste-as se necessário, com base no que você aprendeu.</string>
+    <string name="dia_28_titulo">Dia 28</string>
+    <string name="tip_dia_28">Experimente o "modo avião" por algumas horas do dia, mesmo quando você está em casa.</string>
+    <string name="dia_29_titulo">Dia 29</string>
+    <string name="tip_dia_29">Reflita sobre o que mudou na sua vida nos últimos 29 dias. Anote em um diário.</string>
+    <string name="dia_30_titulo">Dia 30</string>
+    <string name="tip_dia_30">Celebre! Você completou a jornada. Compartilhe sua experiência offline com um amigo.</string>
+</resources>
