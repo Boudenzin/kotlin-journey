@@ -1,5 +1,7 @@
 # 🚀 Minha Jornada com Kotlin + Jetpack Compose
 
+![Tamanho do Repositório](https://img.shields.io/github/repo-size/Boudenzin/kotlin-journey?style=for-the-badge&logo=github&label=Tamanho%20do%20Reposit%C3%B3rio&color=000000&labelColor=2b2b2b&link=https://github.com/Boudenzin/kotlin-journey&logoColor=fff&colorA=4688F1&colorB=65B1F5)
+
 Bem-vindo(a) ao meu repositório de estudos com **Kotlin** e **Jetpack Compose**! Aqui você encontrará projetos, anotações, desafios e experimentos que estou realizando ao longo da minha aprendizagem no desenvolvimento Android moderno.
 
 ---
