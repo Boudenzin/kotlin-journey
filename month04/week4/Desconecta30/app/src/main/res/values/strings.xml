@@ -68,4 +68,9 @@
     <string name="tip_dia_29">Reflita sobre o que mudou na sua vida nos últimos 29 dias. Anote em um diário.</string>
     <string name="dia_30_titulo">Dia 30</string>
     <string name="tip_dia_30">Celebre! Você completou a jornada. Compartilhe sua experiência offline com um amigo.</string>
+
+
+    <string name="expand_less">Expandir menos</string>
+    <string name="expand_more">Expandir mais</string>
+
 </resources>
