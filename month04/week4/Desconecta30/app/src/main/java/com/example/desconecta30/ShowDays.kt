@@ -8,15 +8,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,6 +37,48 @@ import androidx.compose.ui.unit.dp
 import com.example.desconecta30.model.Day
 import com.example.desconecta30.model.DaysRepository
 import com.example.desconecta30.ui.theme.Desconecta30Theme
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CenterAlignedTopAppBar
+import com.example.desconecta30.R
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Desconecta30App() {
+    Scaffold (
+        topBar = {
+            Desconecta30TopAppBar()
+        }
+    ) {
+            innerPadding ->
+        LazyColumn (
+            modifier = Modifier.padding(innerPadding)
+        )
+        {
+            items(DaysRepository.days) { day ->
+                DayCard(
+                    day = day,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Desconecta30TopAppBar(modifier: Modifier = Modifier) {
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = stringResource(R.string.app_name),
+                style = MaterialTheme.typography.displayMedium,
+            )
+        },
+        modifier = modifier.padding(16.dp)
+    )
+}
+
+
 
 @Composable
 fun DayCard(day: Day, modifier: Modifier = Modifier) {
@@ -105,6 +150,6 @@ fun DayCard(day: Day, modifier: Modifier = Modifier) {
 @Composable
 fun DayCardPreview() {
     Desconecta30Theme {
-        DayCard(day = DaysRepository.days[0])
+        Desconecta30App()
     }
 }
