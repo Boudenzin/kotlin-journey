@@ -41,6 +41,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | `Courses`  | App que mostra matérias de um curso e integrantes                    | [`/month04/week2/Courses/`](/month04/week2/Courses/) |
 | `Woof`  | App que mostra cachorros a serem adotados                    | [`/month04/week3/Woof/`](/month04/week3/Woof/) |
 | `Superheroes`  | App que mostra descrições de super-heróis                    | [`/month04/week4/Superheroes/`](/month04/week4/Superheroes/) |
+| `Desconecta30`  | App que mostra conselhos de 30 dias                    | [`/month04/week4/Desconecta30/`](/month04/week4/Desconecta30/) |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
