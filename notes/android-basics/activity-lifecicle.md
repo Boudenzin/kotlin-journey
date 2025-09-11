@@ -59,26 +59,17 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ### `onResume()`
 
   * **Quando é chamado?** Quando a `Activity` está em primeiro plano e o usuário pode interagir com ela. É o estado "ativo".
-  * **O que fazer aqui?** Iniciar recursos que precisam estar ativos apenas quando a tela está em foco:
-      * Começar a tocar animações ou vídeos.
-      * Registrar `BroadcastReceivers`.
-      * Inicializar a câmera ou sensores.
+  * **O que fazer aqui?** Iniciar recursos que precisam estar ativos apenas quando a tela está em foco.
 
 ### `onPause()`
 
-  * **Quando é chamado?** Quando a `Activity` está prestes a sair de primeiro plano. Isso pode acontecer porque outra `Activity` (até mesmo uma caixa de diálogo) está sendo aberta por cima, ou o usuário pressionou o botão "Home".
+  * **Quando é chamado?** Quando a `Activity` está prestes a sair de primeiro plano. Isso pode acontecer porque outra `Activity` está sendo aberta por cima, ou o usuário pressionou o botão "Home".
   * **O que fazer aqui?** Pausar operações que não devem continuar enquanto a `Activity` não está em foco. O código aqui deve ser **muito rápido**.
-      * Salvar dados não salvos (como um rascunho de e-mail).
-      * Pausar animações ou vídeos.
-      * Liberar recursos exclusivos, como a câmera.
 
 ### `onStop()`
 
   * **Quando é chamado?** Quando a `Activity` não está mais visível para o usuário.
   * **O que fazer aqui?** Liberar recursos que não são necessários quando o app não está visível.
-      * Cancelar requisições de rede.
-      * Desregistrar `BroadcastReceivers`.
-      * Realizar operações de "desligamento" mais pesadas que não puderam ser feitas em `onPause()`.
 
 ### `onRestart()`
 
@@ -89,21 +80,107 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
   * **Quando é chamado?** Apenas **uma vez**, antes da `Activity` ser destruída. Isso acontece quando o usuário fecha a `Activity` (pressionando "Voltar") ou quando o sistema a destrói para liberar memória.
   * **O que fazer aqui?** Limpeza final de todos os recursos.
-      * Liberar `ViewModels`.
-      * Cancelar todas as operações em segundo plano.
 
-## Lidando com Mudanças de Configuração e Estado
+-----
 
-Um caso especial e muito comum é a **mudança de configuração**, como a rotação da tela. Quando isso acontece, o Android, por padrão, **destrói e recria** a `Activity` (`onDestroy()` → `onCreate()`).
+## Visualizando o Ciclo de Vida com Logs
 
-Se você não tratar isso, todos os dados na tela (como o texto em um `EditText` ou a posição de uma `ScrollView`) serão perdidos.
+A melhor maneira de entender e depurar o ciclo de vida é adicionar logs a cada um dos callbacks. Isso permite que você veja no **Logcat** do Android Studio exatamente quando cada método é chamado.
 
-  * **`onSaveInstanceState(outState: Bundle)`**: Este método é chamado antes de a `Activity` ser destruída (geralmente após `onPause()`). Use-o para salvar pequenos dados de estado em um `Bundle`.
-  * **`onCreate(savedInstanceState: Bundle?)`**: O `Bundle` que você salvou em `onSaveInstanceState` é passado para o `onCreate` da nova `Activity`. Você pode verificar se `savedInstanceState` não é nulo e restaurar seus dados.
+A classe `Log` do Android é usada para isso, com o método `d()` (debug) sendo o mais comum. É uma boa prática definir uma `TAG` constante para filtrar as mensagens facilmente.
+
+**Exemplo Prático de Logging:**
+
+```kotlin
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+    // Define uma constante para a TAG do Log
+    private val TAG = "MainActivityLifecycle"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate chamado")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart chamado")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume chamado")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause chamado")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop chamado")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart chamado")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy chamado")
+    }
+}
+```
+
+> **Teste você mesmo:** Adicione este código à sua `MainActivity`, execute o app e observe o Logcat. Gire a tela, pressione o botão "Home" e volte para o app. Você verá a sequência exata de chamadas do ciclo de vida\!
+
+-----
+
+## Lidando com Mudanças de Configuração e Estado (Views vs. Compose)
+
+Um caso especial e muito comum é a **mudança de configuração**, como a rotação da tela. Quando isso acontece, o Android, por padrão, **destrói e recria** a `Activity`. Se você não tratar isso, os dados na tela serão perdidos.
+
+### A Solução no Sistema de Views: `onSaveInstanceState`
+
+  * **`onSaveInstanceState(outState: Bundle)`**: Este método é chamado antes de a `Activity` ser destruída. Use-o para salvar pequenos dados de estado em um `Bundle`.
+  * **`onCreate(savedInstanceState: Bundle?)`**: O `Bundle` que você salvou é passado para o `onCreate` da nova `Activity`. Você pode verificar se `savedInstanceState` não é nulo e restaurar seus dados.
+
+### A Solução no Jetpack Compose: `rememberSaveable`
+
+No Jetpack Compose, o conceito é muito mais simples. Em vez de gerenciar manualmente os bundles, usamos o composable **`rememberSaveable`**.
+
+`rememberSaveable` funciona como o `remember`, mas com um superpoder: ele **salva automaticamente o estado** em um `Bundle` para sobreviver a mudanças de configuração e até mesmo à morte do processo pelo sistema.
+
+```kotlin
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+
+@Composable
+fun ContadorPersistente() {
+    // Use 'rememberSaveable' em vez de 'remember'
+    // O estado 'contador' agora sobreviverá à rotação da tela
+    var contador by rememberSaveable { mutableStateOf(0) }
+
+    Button(onClick = { contador++ }) {
+        Text(text = "Contador: $contador")
+    }
+}
+```
+
+Para a maioria dos tipos de dados primitivos e `data classes` anotadas com `@Parcelize`, o `rememberSaveable` funciona sem configuração adicional, tornando o gerenciamento de estado em Compose muito mais direto.
 
 ## A Abordagem Moderna com Jetpack Lifecycle
 
-Os componentes de Arquitetura do Android Jetpack (como `ViewModel` e `LifecycleObserver`) simplificam o gerenciamento do ciclo de vida.
+Os componentes de Arquitetura do Android Jetpack (como `ViewModel` e `LifecycleObserver`) simplificam ainda mais o gerenciamento do ciclo de vida.
 
-  * **`ViewModel`**: Sobrevive automaticamente a mudanças de configuração. É o local ideal para armazenar e gerenciar os dados da UI, eliminando a necessidade de usar `onSaveInstanceState` para dados complexos.
+  * **`ViewModel`**: Sobrevive automaticamente a mudanças de configuração. É o local ideal para armazenar e gerenciar os dados da UI, eliminando a necessidade de usar `onSaveInstanceState` ou `rememberSaveable` para dados complexos e lógica de negócios.
   * **`LifecycleObserver`**: Permite que classes separadas observem os eventos do ciclo de vida de uma `Activity` ou `Fragment`, movendo a lógica de gerenciamento de recursos para fora da `Activity` e tornando o código mais limpo e testável.
