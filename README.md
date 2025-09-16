@@ -43,6 +43,13 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | `Superheroes`  | App que mostra descrições de super-heróis                    | [`/month04/week4/Superheroes/`](/month04/week4/Superheroes/) |
 | `Desconecta30`  | App que mostra conselhos de 30 dias                    | [`/month04/week4/Desconecta30/`](/month04/week4/Desconecta30/) |
 
+### Quarta Parte - Navegação e Estado de Vida
+
+| Projeto       | Descrição                                                              | Caminho                                  |
+|--------------|------------------------------------------------------------------------|------------------------------------------|
+| `Unscramble`  | App usado para ver ViewModel, minigame para desembaralhar palavras                        | [`/month05/week1/Unscramble/`](/month05/week1/Unscramble/) |
+| `DessertClicker`  | App que ao clicar no bolo, aumenta o preço total a se pagar                    | [`/month05/week1/DessertClicker/`](/month05/week1/DessertClicker/) |
+
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
 ---
