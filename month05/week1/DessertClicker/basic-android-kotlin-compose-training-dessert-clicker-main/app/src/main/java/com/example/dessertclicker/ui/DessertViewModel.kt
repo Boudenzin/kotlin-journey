@@ -2,16 +2,59 @@
 package com.example.dessertclicker.ui
 
 import androidx.lifecycle.ViewModel
+import com.example.dessertclicker.data.Datasource
+import com.example.dessertclicker.data.DessertUiState
 import com.example.dessertclicker.model.Dessert
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class DessertViewModel : ViewModel() {
 
+    /**
+     * Aqui se cria um valor privado que pode
+     * ser modificado e depois eu crio um publico
+     * que a UI lê, mas não modifica
+     *
+     */
+
+    private val primeiraSobremesa = Datasource.dessertList.first()
+    private val _uiState = MutableStateFlow(
+        DessertUiState(
+            currentDessertPrice = primeiraSobremesa.price,
+            currentDessertImageId = primeiraSobremesa.imageId
+
+        )
+    )
+
+    val uiState: StateFlow<DessertUiState> = _uiState.asStateFlow()
+
+    /**
+     * Atualiza o estado do jogo quando a sobremesa é clicada.
+     */
     fun onDessertClicked() {
-        val dessertToShow = determineDessertToShow()
+       _uiState.update {  currentState ->
+
+           val newRevenue = currentState.revenue + currentState.currentDessertPrice
+           val dessertsSold = currentState.dessertsSold + 1
+
+           val dessertsToShow = determineDessertToShow(
+               desserts = Datasource.dessertList,
+               dessertsSold = dessertsSold
+           )
+
+           currentState.copy(
+               revenue = newRevenue,
+               dessertsSold = dessertsSold,
+               currentDessertPrice = dessertsToShow.price,
+               currentDessertImageId = dessertsToShow.imageId
+           )
+       }
     }
 
     /**
-     * Determine which dessert to show.
+     * Determina qual sobremesa mostrar com base nas sobremesas vendidas.
      */
     private fun determineDessertToShow(
         desserts: List<Dessert>,
@@ -22,10 +65,6 @@ class DessertViewModel : ViewModel() {
             if (dessertsSold >= dessert.startProductionAmount) {
                 dessertToShow = dessert
             } else {
-                // The list of desserts is sorted by startProductionAmount. As you sell more desserts,
-                // you'll start producing more expensive desserts as determined by startProductionAmount
-                // We know to break as soon as we see a dessert who's "startProductionAmount" is greater
-                // than the amount sold.
                 break
             }
         }
