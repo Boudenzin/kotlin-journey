@@ -288,16 +288,6 @@ private fun DessertsSoldInfo(dessertsSold: Int, modifier: Modifier = Modifier) {
 @Composable
 fun MyDessertClickerAppPreview() {
     DessertClickerTheme {
-        DessertClickerApp(
-
-            uiState = DessertUiState(
-                revenue = 15,
-                dessertsSold = 3,
-                currentDessertPrice = 5,
-                currentDessertImageId = R.drawable.cupcake
-            ),
-            onDessertClicked = {},
-            onShareButtonClicked = {}
-        )
+        DessertClickerAppScreen()
     }
 }
