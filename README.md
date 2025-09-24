@@ -69,11 +69,13 @@ As anotações agora estão divididas em duas partes, em android-basics e em kot
 
 
 ### Android Basics Notes
+- [`activity-lifecicle`](notes/android-basics/activity-lifecicle.md): Documento sobre o ciclo de vida de uma atividade
 - [`button`](notes/android-basics/buttons-and-remember.md): Documento sobre botões em kotlin
 - [`colors`](notes/android-basics/colors.md)
 - [`composable-functions`](notes/android-basics/composable-functions.md): Anotações sobre funções com Composable.
 - [`state-management.md`](notes/android-basicsstate-management.md): Como funciona o gerenciamento de estado em Compose.
 - [`ui-basics`](notes/android-basics/ui-basics.md): Documento com alguns elementos básicos do Jetpack Compose.
+- [`viewmodel`](notes/android-basics/viewmodel.md): Documento que fala sobre ViewModel
 ---
 
 ## 🛠️ Tecnologias
