@@ -3,13 +3,15 @@ package com.example.cupcake.test
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
-import org.junit.Rule
 import androidx.navigation.testing.TestNavHostController
 import com.example.cupcake.CupcakeApp
 import com.example.cupcake.CupcakeScreen
-import org.junit.Assert.assertEquals
+import com.example.cupcake.R
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class CupcakeScreenNavigationTest {
@@ -18,6 +20,11 @@ class CupcakeScreenNavigationTest {
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     // lateinit é usada para declarar uma propriedade que pode ser inicializada após a declaração do objeto.
     private lateinit var navController: TestNavHostController
+
+    private fun navigateToFlavcrScreen() {
+        composeTestRule.onNodeWithStringId(R.string.one_cupcake).performClick()
+        composeTestRule.onNodeWithStringId(R.string.chocolate).performClick()
+    }
 
     @Before
     fun setupCupcakeNavHost() {
@@ -31,7 +38,19 @@ class CupcakeScreenNavigationTest {
 
     @Test
     fun cupcakeNavHost_verifyStartDestination() {
-        assertEquals(CupcakeScreen.Start.name, navController.currentBackStackEntry?.destination?.route)
+        navController.assertCurrentRouteName(CupcakeScreen.Start.name)
+    }
+
+    @Test
+    fun cupcakeNavHost_verifyBackNavigationNotShownOnStartOrderScreen() {
+        val backText = composeTestRule.activity.getString(R.string.back_button)
+        composeTestRule.onNodeWithContentDescription(backText).assertDoesNotExist()
+    }
+
+    @Test
+    fun cupcakeNavHost_clickOneCupcake_navigatesToSelectFlavorScreen(){
+        composeTestRule.onNodeWithStringId(R.string.one_cupcake).performClick()
+        navController.assertCurrentRouteName(CupcakeScreen.Flavor.name)
     }
 }
 
