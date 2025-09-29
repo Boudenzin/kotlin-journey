@@ -50,6 +50,7 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 | `Unscramble`  | App usado para ver ViewModel, minigame para desembaralhar palavras                        | [`/month05/week1/Unscramble/`](/month05/week1/Unscramble/) |
 | `DessertClicker`  | App que ao clicar no bolo, aumenta o preço total a se pagar                    | [`/month05/week1/DessertClicker/`](/month05/week1/DessertClicker/) |
 | `Cupcake`  | App para aprender a usar diferentes telas no Compose                    | [`/month05/week2/Cupcake/`](/month05/week2/Cupcake/) |
+| `LunchTray`  | App para aprender a usar navegação no Compose               | [`/month05/week3/LunchTray/`](/month05/week3/LunchTray/) |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
