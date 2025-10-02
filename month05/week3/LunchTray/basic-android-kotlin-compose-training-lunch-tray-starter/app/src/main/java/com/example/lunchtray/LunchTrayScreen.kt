@@ -33,19 +33,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.lunchtray.datasource.DataSource
+import com.example.lunchtray.ui.AccompanimentMenuScreen
+import com.example.lunchtray.ui.CheckoutScreen
 import com.example.lunchtray.ui.EntreeMenuScreen
 import com.example.lunchtray.ui.OrderViewModel
+import com.example.lunchtray.ui.SideDishMenuScreen
 import com.example.lunchtray.ui.StartOrderScreen
 
 enum class LunchTrayScreen(@StringRes val title: Int) {
@@ -154,11 +155,53 @@ fun LunchTrayApp(
 
             // Terceiro Composable (Side Dish)
 
+            composable(route = LunchTrayScreen.MenuGuarnicao.name) {
+                SideDishMenuScreen(
+                    options = DataSource.sideDishMenuItems,
+                    onCancelButtonClicked = {
+                        cancelOrderAndNavigateToStart(viewModel, navController)
+                    },
+                    onNextButtonClicked = {
+                        navController.navigate(LunchTrayScreen.MenuAcompanhamentos.name)
+                    },
+                    onSelectionChanged = { viewModel.updateSideDish(it) },
+                    modifier = Modifier.fillMaxHeight()
+
+                )
+            }
+
 
             // Quarto Composable (Accompaniment)
 
+            composable(route = LunchTrayScreen.MenuAcompanhamentos.name) {
+                AccompanimentMenuScreen(
+                    options = DataSource.accompanimentMenuItems,
+                    onCancelButtonClicked = {
+                        cancelOrderAndNavigateToStart(viewModel, navController)
+                    },
+                    onNextButtonClicked = {
+                        navController.navigate(LunchTrayScreen.Checkout.name)
+                    },
+                    onSelectionChanged = { viewModel.updateAccompaniment(it) },
+                    modifier = Modifier.fillMaxHeight()
+                )
+            }
+
 
             // Quinto Composable (Checkout)
+
+            composable(route = LunchTrayScreen.Checkout.name) {
+                CheckoutScreen(
+                    orderUiState = uiState,
+                    onNextButtonClicked = {
+                        navController.navigate(LunchTrayScreen.Start.name)
+                    },
+                    onCancelButtonClicked = {
+                        cancelOrderAndNavigateToStart(viewModel, navController)
+                    },
+                    modifier = Modifier.fillMaxHeight()
+                )
+            }
         }
     }
 }
