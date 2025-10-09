@@ -95,53 +95,7 @@ fun ReplyHomeScreen(
             text = stringResource(id = R.string.tab_spam)
         )
     )
-    if (replyUiState.isShowingHomepage) {
-        ReplyAppContent(
-            navigationType = navigationType,
-            contentType = contentType,
-            replyUiState = replyUiState,
-            onTabPressed = onTabPressed,
-            onEmailCardPressed = onEmailCardPressed,
-            navigationItemContentList = navigationItemContentList,
-            modifier = modifier
-        )
-    } else {
-        ReplyDetailsScreen(
-            replyUiState = replyUiState,
-            isFullScreen =  true,
-            onBackPressed = onDetailScreenBackPressed,
-            modifier = modifier
-        )
-    }
-
-    if (navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER) {
-        PermanentNavigationDrawer(
-            drawerContent = {
-                PermanentDrawerSheet(Modifier.width(dimensionResource(R.dimen.drawer_width))) {
-                    NavigationDrawerContent(
-                        selectedDestination = replyUiState.currentMailbox,
-                        onTabPressed = onTabPressed,
-                        navigationItemContentList = navigationItemContentList,
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .fillMaxHeight()
-                            .background(MaterialTheme.colorScheme.inverseOnSurface)
-                            .padding(dimensionResource(R.dimen.drawer_padding_content))
-                    )
-                }
-            }
-        ) {
-            ReplyAppContent(
-                navigationType = navigationType,
-                contentType = contentType,
-                replyUiState = replyUiState,
-                onTabPressed = onTabPressed,
-                onEmailCardPressed = onEmailCardPressed,
-                navigationItemContentList = navigationItemContentList,
-                modifier = modifier
-            )
-        }
-    } else {
+    val replyContent = @Composable {
         if (replyUiState.isShowingHomepage) {
             ReplyAppContent(
                 navigationType = navigationType,
@@ -156,14 +110,43 @@ fun ReplyHomeScreen(
             ReplyDetailsScreen(
                 replyUiState = replyUiState,
                 onBackPressed = onDetailScreenBackPressed,
+                isFullScreen = navigationType != ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER, // Ajuste para o tamanho da tela de detalhes
                 modifier = modifier
             )
         }
     }
 
-
-
+    if (navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER) {
+        val navigationDrawerContentDescription = stringResource(R.string.navigation_drawer)
+        PermanentNavigationDrawer(
+            drawerContent = {
+                PermanentDrawerSheet(Modifier.width(dimensionResource(R.dimen.drawer_width))) {
+                    NavigationDrawerContent(
+                        selectedDestination = replyUiState.currentMailbox,
+                        onTabPressed = onTabPressed,
+                        navigationItemContentList = navigationItemContentList,
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .fillMaxHeight()
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
+                            .padding(dimensionResource(R.dimen.drawer_padding_content))
+                    )
+                }
+            },
+            modifier = Modifier.testTag(navigationDrawerContentDescription)
+        ) {
+            // Chamada ÚNICA para o conteúdo dentro do Drawer
+            replyContent()
+        }
+    } else {
+        // Chamada ÚNICA para o conteúdo (para Compact e Medium)
+        replyContent()
+    }
 }
+
+
+
+
 
 @Composable
 private fun ReplyAppContent(
@@ -212,6 +195,7 @@ private fun ReplyAppContent(
                     navigationItemContentList = navigationItemContentList,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .testTag(bottomNavigationContentDescription)
                 )
             }
         }
