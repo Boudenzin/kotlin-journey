@@ -117,7 +117,6 @@ fun ReplyHomeScreen(
     }
 
     if (navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER) {
-        val navigationDrawerContentDescription = stringResource(R.string.navigation_drawer)
         PermanentNavigationDrawer(
             drawerContent = {
                 PermanentDrawerSheet(Modifier.width(dimensionResource(R.dimen.drawer_width))) {
@@ -132,8 +131,7 @@ fun ReplyHomeScreen(
                             .padding(dimensionResource(R.dimen.drawer_padding_content))
                     )
                 }
-            },
-            modifier = Modifier.testTag(navigationDrawerContentDescription)
+            }
         ) {
             // Chamada ÚNICA para o conteúdo dentro do Drawer
             replyContent()
@@ -160,10 +158,12 @@ private fun ReplyAppContent(
 ) {
     Row(modifier = modifier) {
         AnimatedVisibility(visible = navigationType == ReplyNavigationType.NAVIGATION_RAIL) {
+            val navigationDrawerContentDescription = stringResource(R.string.navigation_rail)
             ReplyNavigationRail(
                 currentTab = replyUiState.currentMailbox,
                 onTabPressed = onTabPressed,
-                navigationItemContentList = navigationItemContentList
+                navigationItemContentList = navigationItemContentList,
+                modifier = Modifier.testTag(navigationDrawerContentDescription)
             )
         }
         Column(

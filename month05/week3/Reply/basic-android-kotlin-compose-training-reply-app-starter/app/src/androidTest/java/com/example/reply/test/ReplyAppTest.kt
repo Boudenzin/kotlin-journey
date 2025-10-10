@@ -6,6 +6,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.example.reply.ui.ReplyApp
 import org.junit.Rule
 import org.junit.Test
+import com.example.reply.R;
 
 class ReplyAppTest {
 
@@ -20,7 +21,21 @@ class ReplyAppTest {
             )
         }
         composeTestRule.onNodeWithTagForStringId(
-            com.example.reply.R.string.navigation_bottom
+            R.string.navigation_bottom
+        ).assertExists()
+    }
+
+    @Test
+    fun mediumDevice_verifyUsingNavigationRail() {
+        // Set up medium window
+        composeTestRule.setContent {
+            ReplyApp(
+                windowSize = WindowWidthSizeClass.Medium
+            )
+        }
+        // Navigation rail is displayed
+        composeTestRule.onNodeWithTagForStringId(
+            R.string.navigation_rail
         ).assertExists()
     }
 
