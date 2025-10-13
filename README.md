@@ -18,40 +18,40 @@ Documentar de forma prática e progressiva tudo o que venho aprendendo com Kotli
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `BdayApp`     | Primeiro app simples usando Compose: exibe uma mensagem de aniversário | [`/month01-bdayapp`](month01/BDayApp)  |
-| `LearnTogether`  | App que fala um pouco sobre Jetpack Compose e brinca com imagens                              | [`/month02-apps/week1/LearnTogether/`](month02-apps/week1/LearnTogether) |
-| `Taskmanager`  | Tela de verificação das tarefas                              | [`/month02-apps/week1/TaskManager/`](month02-apps/week1/TaskManager) |
-| `GridLayout`  | Tela que dá explicações sobre os tipos de objetos em Compose                             | [`/month02-apps/week1/GridLayout/`](month02-apps/week1/GridLayout) |
-| `CartaoVisita`  | Tela que apresenta o cartão de visita                             | [`/month02-apps/week2/CartaoVisita/`](month02-apps/week2/CartaoVisita)|
+| `BdayApp`     | Primeiro app simples usando Compose: exibe uma mensagem de aniversário | [`/months/month01-bdayapp`](/months/month01/BDayApp)  |
+| `LearnTogether`  | App que fala um pouco sobre Jetpack Compose e brinca com imagens                              | [`/months/month02-apps/week1/LearnTogether/`](months/month02-apps/week1/LearnTogether) |
+| `Taskmanager`  | Tela de verificação das tarefas                              | [`/months/month02-apps/week1/TaskManager/`](/months/month02-apps/week1/TaskManager) |
+| `GridLayout`  | Tela que dá explicações sobre os tipos de objetos em Compose                             | [`/months/month02-apps/week1/GridLayout/`](/months/month02-apps/week1/GridLayout) |
+| `CartaoVisita`  | Tela que apresenta o cartão de visita                             | [`/months/month02-apps/week2/CartaoVisita/`](/months/month02-apps/week2/CartaoVisita)|
 
 ### Segunda Parte – Construindo a UI do aplicativo
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `DiceRollerApp`  | App que rola um dado aleatoriamente                         | [`/month02-apps/week4/DiceRollerApp/`](month02-apps/week4/DiceRollerApp)|
-| `LemonadeApp`  | App que espreme um limão para passar o tempo                         | [`/month03/week1/LemonadeApp/`](month03/week1/Lemonade) |
-| `TipCalculator`  | Calculadora de gorjeta                         | [`/month03/week2/TipCalculator/`](month03/TipCalculator/basic-android-kotlin-compose-training-tip-calculator-starter/) |
-| `GalleryApp`  | App que mostra pinturas de artes com autor, titulo e ano com responsividade                         | [`/month03/week3/GalleryApp/`](month03/week3/GalleryApp) |
+| `DiceRollerApp`  | App que rola um dado aleatoriamente                         | [`/months/month02-apps/week4/DiceRollerApp/`](/months/month02-apps/week4/DiceRollerApp)|
+| `LemonadeApp`  | App que espreme um limão para passar o tempo                         | [`/months/month03/week1/LemonadeApp/`](/months/month03/week1/Lemonade) |
+| `TipCalculator`  | Calculadora de gorjeta                         | [`/months/month03/week2/TipCalculator/`](/months/month03/TipCalculator/basic-android-kotlin-compose-training-tip-calculator-starter/) |
+| `GalleryApp`  | App que mostra pinturas de artes com autor, titulo e ano com responsividade                         | [`/months/month03/week3/GalleryApp/`](/months/month03/week3/GalleryApp) |
 
 ### Terceira Parte – Aprofundamento em Material Design
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/month04/week1/Scrollable/`](/month04/week1/Scrollable/) |
-| `Courses`  | App que mostra matérias de um curso e integrantes                    | [`/month04/week2/Courses/`](/month04/week2/Courses/) |
-| `Woof`  | App que mostra cachorros a serem adotados                    | [`/month04/week3/Woof/`](/month04/week3/Woof/) |
-| `Superheroes`  | App que mostra descrições de super-heróis                    | [`/month04/week4/Superheroes/`](/month04/week4/Superheroes/) |
-| `Desconecta30`  | App que mostra conselhos de 30 dias                    | [`/month04/week4/Desconecta30/`](/month04/week4/Desconecta30/) |
+| `Scrollable/Affirmations`  | App que mostra textos fortificantes e enaltecedores                         | [`/months/month04/week1/Scrollable/`](/months/month04/week1/Scrollable/) |
+| `Courses`  | App que mostra matérias de um curso e integrantes                    | [`/months/month04/week2/Courses/`](/months/month04/week2/Courses/) |
+| `Woof`  | App que mostra cachorros a serem adotados                    | [`/months/month04/week3/Woof/`](/months/month04/week3/Woof/) |
+| `Superheroes`  | App que mostra descrições de super-heróis                    | [`/months/month04/week4/Superheroes/`](/months/month04/week4/Superheroes/) |
+| `Desconecta30`  | App que mostra conselhos de 30 dias                    | [`/months/month04/week4/Desconecta30/`](/months/month04/week4/Desconecta30/) |
 
 ### Quarta Parte - Navegação e Estado de Vida
 
 | Projeto       | Descrição                                                              | Caminho                                  |
 |--------------|------------------------------------------------------------------------|------------------------------------------|
-| `Unscramble`  | App usado para ver ViewModel, minigame para desembaralhar palavras                        | [`/month05/week1/Unscramble/`](/month05/week1/Unscramble/) |
-| `DessertClicker`  | App que ao clicar no bolo, aumenta o preço total a se pagar                    | [`/month05/week1/DessertClicker/`](/month05/week1/DessertClicker/) |
-| `Cupcake`  | App para aprender a usar diferentes telas no Compose                    | [`/month05/week2/Cupcake/`](/month05/week2/Cupcake/) |
-| `LunchTray`  | App para aprender a usar navegação no Compose               | [`/month05/week3/LunchTray/`](/month05/week3/LunchTray/) |
-| `Reply`  | App para aprender a usar navegação e responsividade no Compose               | [`/month05/week3/Reply`](/month05/week3/Reply/) |
+| `Unscramble`  | App usado para ver ViewModel, minigame para desembaralhar palavras                        | [`/months/month05/week1/Unscramble/`](/months/month05/week1/Unscramble/) |
+| `DessertClicker`  | App que ao clicar no bolo, aumenta o preço total a se pagar                    | [`/months/month05/week1/DessertClicker/`](/months/month05/week1/DessertClicker/) |
+| `Cupcake`  | App para aprender a usar diferentes telas no Compose                    | [`/months/month05/week2/Cupcake/`](/months/month05/week2/Cupcake/) |
+| `LunchTray`  | App para aprender a usar navegação no Compose               | [`/months/month05/week3/LunchTray/`](/months/month05/week3/LunchTray/) |
+| `Reply`  | App para aprender a usar navegação e responsividade no Compose               | [`/months/month05/week3/Reply`](/months/month05/week3/Reply/) |
 
 > Mais projetos serão adicionados conforme avanço nas semanas.
 
