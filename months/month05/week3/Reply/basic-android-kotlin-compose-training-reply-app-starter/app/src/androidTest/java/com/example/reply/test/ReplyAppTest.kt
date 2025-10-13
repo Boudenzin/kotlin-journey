@@ -39,5 +39,17 @@ class ReplyAppTest {
         ).assertExists()
     }
 
+    @Test
+    @TestAnnotations.TestCompactWidth
+    fun compactDevice_verifyUsingBottomNavigation() {
+
+    }
+
+    @Test
+    @TestAnnotations.TestMediumWidth
+    fun mediumDevice_verifyUsingNavigationRail() {
+
+    }
+
 
 }
