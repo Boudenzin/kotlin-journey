@@ -82,18 +82,6 @@ class ReplyAppStateRestorationTest {
             )
     }
 
-    @Test
-    @TestAnnotations.TestCompactWidth
-    fun compactDevice_selectedEmailEmailRetained_afterConfigChange() {
-
-    }
-
-    @Test
-    @TestAnnotations.TestExpandedWidth
-    fun expandedDevice_selectedEmailEmailRetained_afterConfigChange() {
-
-    }
-
 
 
 }
