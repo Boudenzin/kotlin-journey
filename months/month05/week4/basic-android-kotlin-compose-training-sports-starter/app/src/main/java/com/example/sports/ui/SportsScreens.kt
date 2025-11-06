@@ -16,6 +16,7 @@
 
 package com.example.sports.ui
 
+import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -48,14 +49,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -69,6 +74,7 @@ import com.example.sports.R
 import com.example.sports.data.LocalSportsDataProvider
 import com.example.sports.model.Sport
 import com.example.sports.ui.theme.SportsTheme
+import com.example.sports.utils.SportsContentType
 
 /**
  * Main composable that serves as container
@@ -76,42 +82,77 @@ import com.example.sports.ui.theme.SportsTheme
  */
 @Composable
 fun SportsApp(
+    windowSize: WindowSizeClass
 ) {
     val viewModel: SportsViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
 
+    val contentType: SportsContentType = when (windowSize.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> SportsContentType.ListOnly
+        WindowWidthSizeClass.Medium -> SportsContentType.ListOnly
+        else -> SportsContentType.ListAndDetail
+    }
+
+    val activity = LocalContext.current as Activity
+
     Scaffold(
         topBar = {
             SportsAppBar(
+                contentType = contentType,
                 isShowingListPage = uiState.isShowingListPage,
                 onBackButtonClick = { viewModel.navigateToListPage() },
             )
         }
     ) { innerPadding ->
-        if (uiState.isShowingListPage) {
-            SportsList(
-                sports = uiState.sportsList,
-                onClick = {
-                    viewModel.updateCurrentSport(it)
-                    viewModel.navigateToDetailPage()
-                },
-                contentPadding = innerPadding,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = dimensionResource(R.dimen.padding_medium),
-                        start = dimensionResource(R.dimen.padding_medium),
-                        end = dimensionResource(R.dimen.padding_medium),
+        when (contentType) {
+            SportsContentType.ListOnly -> {
+                // Comportamento anterior (Telhas Compactas e Médias)
+                if (uiState.isShowingListPage) {
+                    SportsList(
+                        sports = uiState.sportsList,
+                        onClick = {
+                            viewModel.updateCurrentSport(it)
+                            viewModel.navigateToDetailPage()
+                        },
+                        contentPadding = innerPadding,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = dimensionResource(R.dimen.padding_medium),
+                                start = dimensionResource(R.dimen.padding_medium),
+                                end = dimensionResource(R.dimen.padding_medium),
+                            )
                     )
-            )
-        } else {
-            SportsDetail(
-                selectedSport = uiState.currentSport,
-                contentPadding = innerPadding,
-                onBackPressed = {
-                    viewModel.navigateToListPage()
+                } else {
+                    SportsDetail(
+                        selectedSport = uiState.currentSport,
+                        contentPadding = innerPadding,
+                        onBackPressed = {
+                            viewModel.navigateToListPage()
+                        }
+                    )
                 }
-            )
+            }
+
+            SportsContentType.ListAndDetail -> {
+                // Novo Comportamento (Tela Expandida)
+                SportsListAndDetails(
+                    sports = uiState.sportsList,
+                    onClick = {
+                        viewModel.updateCurrentSport(it)
+                        // Não navegamos, apenas atualizamos o esporte selecionado
+                    },
+                    selectedSport = uiState.currentSport,
+                    contentPadding = innerPadding,
+                    // Lógica de "Voltar": Fecha a Activity (o app)
+                    onBackPressed = {
+                        activity.finish()
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = dimensionResource(R.dimen.padding_medium))
+                )
+            }
         }
     }
 }
@@ -124,20 +165,24 @@ fun SportsApp(
 fun SportsAppBar(
     onBackButtonClick: () -> Unit,
     isShowingListPage: Boolean,
+    contentType: SportsContentType,
     modifier: Modifier = Modifier
 ) {
+
+    val showBackButton = !isShowingListPage && contentType == SportsContentType.ListOnly
+
     TopAppBar(
         title = {
             Text(
                 text =
-                if (!isShowingListPage) {
+                if (showBackButton) {
                     stringResource(R.string.detail_fragment_label)
                 } else {
                     stringResource(R.string.list_fragment_label)
                 }
             )
         },
-        navigationIcon = if (!isShowingListPage) {
+        navigationIcon = if (showBackButton) {
             {
                 IconButton(onClick = onBackButtonClick) {
                     Icon(
@@ -348,21 +393,33 @@ fun SportsListAndDetails(
     onClick: (Sport) -> Unit,
     selectedSport: Sport,
     onBackPressed: () -> Unit,
-
+    contentPadding: PaddingValues,
     modifier: Modifier = Modifier
 ) {
+
     BackHandler {
-        onBackPressed
+        onBackPressed()
     }
-    Row() {
-        LazyColumn (
-            contentPadding = PaddingValues(0.dp),
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
-            modifier = modifier,
-        ){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(contentPadding)
+    ) {
+        SportsList(
+            sports = sports,
+            onClick = onClick,
+            contentPadding = PaddingValues(),
+            modifier = Modifier
+                .weight(1f)
+                .padding(end = dimensionResource(R.dimen.padding_medium))
+        )
 
-
-        }
+        SportsDetail(
+            selectedSport = selectedSport,
+            onBackPressed = {},
+            contentPadding = PaddingValues(),
+            modifier = Modifier.weight(2f)
+        )
     }
 }
 
@@ -386,6 +443,26 @@ fun SportsListPreview() {
             SportsList(
                 sports = LocalSportsDataProvider.getSportsData(),
                 onClick = {},
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, widthDp = 1000)
+@Composable
+fun SportsListAndDetailsPreview() {
+    SportsTheme {
+        Surface {
+
+            val sports = LocalSportsDataProvider.getSportsData()
+            val selectedSport = sports.first()
+
+            SportsListAndDetails(
+                sports = sports,
+                onClick = {},
+                selectedSport = selectedSport,
+                onBackPressed = {},
+                contentPadding = PaddingValues(top = 56.dp)
             )
         }
     }
